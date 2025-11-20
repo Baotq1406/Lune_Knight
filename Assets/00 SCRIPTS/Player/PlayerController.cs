@@ -21,14 +21,19 @@ public class PlayerController : MonoBehaviour
     private float _normalGravity;                        // luu gravity goc de reset sau dash
     #endregion
 
+    #region Attack Settings
+    [SerializeField] private float _attackDuration = 0.25f;
+    private bool _isAttacking = false;
+    #endregion
+
     # region State
     [SerializeField] private bool _isOnGrounded;         // kiem tra cham dat
     [SerializeField] private int _maxJumpCount = 2;      // so lan nhay toi da
     private int _currentJumpCount = 0;                   // so lan nhay hien tai
     [SerializeField] PlayerState _playerState = PlayerState.IDLE; // trang thai hien tai
-    //[SerializeField] AttackState _attackState = AttackState.ATK1; // trang thai tan cong hien tai
     [SerializeField] AnimationControllerBase _anim;    // reference animation controller
     # endregion
+
 
     private Rigidbody2D _rigi;
 
@@ -45,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
         JumpCheck();    // kiem tra nhay    
         TryDash();      // kiem tra nhan nut dash
+        TryAttack(); // kiem tra tan cong
+
 
         UpdateState();  // cap nhat trang thai nhan vat
         _anim.UpdateAnimation(_playerState); // update animation
@@ -62,6 +69,12 @@ public class PlayerController : MonoBehaviour
         if (_isDashing) // neu dang dash
         {
             _playerState = PlayerState.DASH;
+            return;
+        }
+
+        if (_isAttacking)
+        {
+            _playerState = PlayerState.ATTACK;
             return;
         }
 
@@ -139,14 +152,15 @@ public class PlayerController : MonoBehaviour
     IEnumerator DashCoroutine()
     {
         _isDashing = true;
-        _dashCooldownTimer = _dashCooldown;
+        _dashCooldownTimer = _dashCooldown; // reset cooldown
 
-        float dashDirection = transform.localScale.x > 0 ? 1 : -1;
+        float dashDirection = transform.localScale.x > 0 ? 1 : -1; // xac dinh huong dash theo huong nhan vat
 
         _rigi.gravityScale = 0;
 
         float dashTime = 0f;
 
+        // thuc hien dash trong khoang thoi gian dashDuration
         while (dashTime < _dashDuration)
         {
             // lay input nguoi choi
@@ -166,6 +180,30 @@ public class PlayerController : MonoBehaviour
         _rigi.gravityScale = _normalGravity;
         _isDashing = false;
     }
+
+    // ------------------- ATTACK -------------------
+    void TryAttack()
+    {
+        if (_isDashing || _isAttacking)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(AttackCoroutine());
+        }
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        _isAttacking = true;
+
+        _rigi.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(_attackDuration); // cho den khi ket thuc attack
+
+        _isAttacking = false;
+    }
+
 
     // ------------------ KIEM TRA DAT --------------------
     private void OnCollisionEnter2D(Collision2D collision)

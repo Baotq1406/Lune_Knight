@@ -849,12 +849,11 @@ MonoBehaviour:
   _dashSpeed: 22
   _dashDuration: 0.2
   _dashCooldown: 1
+  _attackDuration: 0.4
   _isOnGrounded: 0
   _maxJumpCount: 2
   _playerState: 0
-  _attackState: 1
   _anim: {fileID: 206978089934197061}
-  _attackDuration: 0.8
 --- !u!70 &8719253684127740045
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
