@@ -1,12 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     # region Movement
-    [SerializeField] private float _speed = 5f;           // toc do di chuyen
-    [SerializeField] private float _jumpForce = 400f;    // luc nhay
+    [SerializeField] private float _speed;             // toc do di chuyen         
+    [SerializeField] private float _jumpForce;         // luc nhay
+    [SerializeField] private float _fallMultiplier;    // dieu chinh roi nhanh hon
+    [SerializeField] private float _lowJumpMultiplier; // dieu chinh nhay thap hon
+
     #endregion
 
     #region Dash Settings
@@ -15,13 +18,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashCooldown = 0.5f; // thoi gian hoi dash
     private float _dashCooldownTimer = 0f;               // timer hoi dash
     private bool _isDashing = false;                     // trang thai dash dang dien ra
-
     private float _normalGravity;                        // luu gravity goc de reset sau dash
     #endregion
 
     # region State
     [SerializeField] private bool _isOnGrounded;         // kiem tra cham dat
+    [SerializeField] private int _maxJumpCount = 2;      // so lan nhay toi da
+    private int _currentJumpCount = 0;                   // so lan nhay hien tai
     [SerializeField] PlayerState _playerState = PlayerState.IDLE; // trang thai hien tai
+    //[SerializeField] AttackState _attackState = AttackState.ATK1; // trang thai tan cong hien tai
     [SerializeField] AnimationControllerBase _anim;    // reference animation controller
     # endregion
 
@@ -38,11 +43,12 @@ public class PlayerController : MonoBehaviour
         if (!_isDashing) // khong di chuyen binh thuong khi dash
             Moving();
 
-        JumpCheck();    // kiem tra nhay
+        JumpCheck();    // kiem tra nhay    
         TryDash();      // kiem tra nhan nut dash
 
         UpdateState();  // cap nhat trang thai nhan vat
         _anim.UpdateAnimation(_playerState); // update animation
+
 
         Debug.DrawRay(transform.position, Vector2.down * 0.7f, Color.red); // ve ray kiem tra dat
 
@@ -100,10 +106,24 @@ public class PlayerController : MonoBehaviour
     // ----------------------- NHAY ------------------------
     void JumpCheck()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isOnGrounded && !_isDashing)
+        // Nhấn Space để nhảy 
+        if (Input.GetKeyDown(KeyCode.Space) && _currentJumpCount < _maxJumpCount && !_isDashing)
         {
-            _isOnGrounded = false;                // tat kiem tra dat khi nhay
-            _rigi.AddForce(new Vector2(0, _jumpForce)); // them luc nhay
+            _rigi.velocity = new Vector2(_rigi.velocity.x, 0); // reset lực rơi cho lần nhảy tiếp theo
+            _rigi.AddForce(new Vector2(0, _jumpForce));
+
+            _isOnGrounded = false;
+            _currentJumpCount++;
+        }
+
+        // Điều chỉnh rơi nhanh hơn và nhảy thấp hơn
+        if (_rigi.velocity.y < 0)
+        {
+            _rigi.velocity += Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (_rigi.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            _rigi.velocity += Vector2.up * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -147,7 +167,6 @@ public class PlayerController : MonoBehaviour
         _isDashing = false;
     }
 
-
     // ------------------ KIEM TRA DAT --------------------
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -155,6 +174,7 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null)
         {
             _isOnGrounded = true; // dat dat
+            _currentJumpCount = 0; // reset double jump
         }
     }
 
@@ -165,6 +185,7 @@ public class PlayerController : MonoBehaviour
         RUN,
         JUMP,
         FALL,
-        DASH
+        DASH,
+        ATTACK,
     }
-}
+}               

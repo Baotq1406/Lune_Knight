@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
         //Vector3 newPos = new Vector3(_player.position.x, _player.position.y, this.transform.position.z);
         //this.transform.position = newPos;
 
+        // Thuc hien di chuyen camera theo player voi offset
         Vector3 pos = _player.position + (Vector3)_camOffset;
         pos.z = Camera.main.transform.position.z;
         Camera.main.transform.position = pos;

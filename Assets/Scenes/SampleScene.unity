@@ -657,11 +657,42 @@ Transform:
   m_GameObject: {fileID: 1142967155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.37, y: 0.38, z: 0}
+  m_LocalPosition: {x: -6.37, y: 0, z: 0}
   m_LocalScale: {x: 7.0492744, y: 0.5275, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664509754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664509755}
+  m_Layer: 0
+  m_Name: Active Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664509755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664509754}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6206494582658343722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &206978089934197061 stripped
 MonoBehaviour:
@@ -739,7 +770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5007683700540649272, guid: 0789916d99fb28847ac8695283c7fd89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5007683700540649272, guid: 0789916d99fb28847ac8695283c7fd89, type: 3}
       propertyPath: m_LocalPosition.z
@@ -791,11 +822,12 @@ Transform:
   m_GameObject: {fileID: 2014010146662321055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1386402458040405020}
+  - {fileID: 1664509755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8101366025799586224
@@ -810,14 +842,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c9d9da4ea77474abb7f479563691be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 10
   _jumpForce: 300
-  _dashSpeed: 10
-  _dashDuration: 0.4
+  _fallMultiplier: 3
+  _lowJumpMultiplier: 2
+  _dashSpeed: 22
+  _dashDuration: 0.2
   _dashCooldown: 1
   _isOnGrounded: 0
+  _maxJumpCount: 2
   _playerState: 0
+  _attackState: 1
   _anim: {fileID: 206978089934197061}
+  _attackDuration: 0.8
 --- !u!70 &8719253684127740045
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
