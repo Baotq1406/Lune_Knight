@@ -41,7 +41,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private void OnDisable()
     {
-        anim.SetBool("isRunning", false); // tat animation khi enemy bi vo hieu hoa
+        anim.SetBool(CONSTANT.IS_RUNNING, false); // tat animation khi enemy bi vo hieu hoa
     }
 
     private void Update()
@@ -66,7 +66,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private void DirectionChange()
     {
-        anim.SetBool("isRunning", false); // tat animation khi dung
+        anim.SetBool(CONSTANT.IS_RUNNING, false); // tat animation khi dung
         idleTimer += Time.deltaTime; // dem thoi gian dung
 
         if (idleTimer > idleDuration)
@@ -76,7 +76,7 @@ public class EnemyPatrol : MonoBehaviour
     private void MoveInDirection(int _direction)
     {
         idleTimer = 0; // reset bo dem khi bat dau di chuyen
-        anim.SetBool("isRunning", true); // bat animation di chuyen
+        anim.SetBool(CONSTANT.IS_RUNNING, true); // bat animation di chuyen
 
         // lat enemy de mat huong vao phuong di chuyen
         enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * _direction,

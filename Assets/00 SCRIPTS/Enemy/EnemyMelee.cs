@@ -35,7 +35,7 @@ public class EnemyMelee : MonoBehaviour
             if (cooldownTimer >= _attackCooldown)
             {
                 cooldownTimer = 0; // reset bo dem
-                _anim.SetTrigger("meleeAttack"); // kich hoat animation tan cong
+                _anim.SetTrigger(CONSTANT.MELEE_ATTACK); // kich hoat animation tan cong
             }
         }
 
