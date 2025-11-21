@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    # region Movement
+    #region Movement
+    [Header("Movement Settings")]
     [SerializeField] private float _speed;             // toc do di chuyen         
     [SerializeField] private float _jumpForce;         // luc nhay
     [SerializeField] private float _fallMultiplier;    // dieu chinh roi nhanh hon
     [SerializeField] private float _lowJumpMultiplier; // dieu chinh nhay thap hon
-
     #endregion
 
     #region Dash Settings
+    [Header("Dash Settings")]
     [SerializeField] private float _dashSpeed = 10f;     // toc do dash
     [SerializeField] private float _dashDuration = 0.2f; // thoi gian giu toc do dash
     [SerializeField] private float _dashCooldown = 0.5f; // thoi gian hoi dash
@@ -22,18 +23,21 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Attack Settings
-    [SerializeField] private float _attackDuration = 0.25f;
-    private bool _isAttacking = false;
+    [Header("Attack Settings")]
+    [SerializeField] private float _attackDuration = 0.25f; // thoi gian tan cong
+    private bool _isAttacking = false;                     // trang thai tan cong
     #endregion
 
-    # region State
+    #region Player State
+    [Header("Player State")]
     [SerializeField] private bool _isOnGrounded;         // kiem tra cham dat
     [SerializeField] private int _maxJumpCount = 2;      // so lan nhay toi da
     private int _currentJumpCount = 0;                   // so lan nhay hien tai
     [SerializeField] PlayerState _playerState = PlayerState.IDLE; // trang thai hien tai
-    public PlayerState playerState => _playerState; // getter trang thai nhan vat
+    public PlayerState playerState => _playerState;      // getter trang thai nhan vat
     [SerializeField] AnimationControllerBase _anim;    // reference animation controller
-    # endregion
+    #endregion
+
 
 
     private Rigidbody2D _rigi;

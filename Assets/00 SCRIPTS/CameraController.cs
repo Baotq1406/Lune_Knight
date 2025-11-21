@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    #region CameraFollowSettings
     Transform _player;
     [SerializeField] Vector2 _camOffset;
-
+    #endregion
     void Start()
     {
         _player = GameManager.Instance.Player.transform;
