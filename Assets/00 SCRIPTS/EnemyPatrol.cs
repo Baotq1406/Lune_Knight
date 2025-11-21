@@ -25,7 +25,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void Start()
     {
-        _rigi = GetComponent<Rigidbody2D>(); // lay component Rigidbody2D
+        _rigi = this.GetComponent<Rigidbody2D>(); // lay component Rigidbody2D
         // dat diem dich khoi tao (di toi pointB truoc)
         _currentPoint = pointB.transform;
         _anim.SetBool("isRunning", true); // bat animation chay
@@ -58,11 +58,16 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     // Ve duong tu pointA den pointB tren editor de hieu duong di chuyen
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         if (pointA && pointB)
         {
-            Gizmos.color = Color.yellow;
+            Gizmos.color = Color.green;
+            // Vẽ vòng tròn tại pointA và pointB
+            Gizmos.DrawWireSphere(pointA.transform.position, 0.5f);
+            Gizmos.DrawWireSphere(pointB.transform.position, 0.5f);
+
+            // Vẽ đường nối giữa pointA và pointB
             Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
         }
     }
