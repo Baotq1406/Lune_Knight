@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         _anim.UpdateAnimation(_playerState); // update animation
 
 
-        Debug.DrawRay(transform.position, Vector2.down * 0.7f, Color.red); // ve ray kiem tra dat
+        Debug.DrawRay(transform.position, Vector2.down * 0.8f, Color.red); // ve ray kiem tra dat
 
         if (_dashCooldownTimer > 0) // giam timer cooldown
             _dashCooldownTimer -= Time.deltaTime;
@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
     // ------------------ KIEM TRA DAT --------------------
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.7f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f);
         if (hit.collider != null)
         {
             _isOnGrounded = true; // dat dat

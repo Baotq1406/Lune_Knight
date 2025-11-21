@@ -5614,7 +5614,7 @@ MonoBehaviour:
   - {fileID: 1102209085}
   - {fileID: 1996488196}
   - {fileID: 914477201}
-  _baseSpeed: 1.5
+  _baseSpeed: 2
   _configSpeed: 0.05
 --- !u!114 &2133246614 stripped
 MonoBehaviour:
