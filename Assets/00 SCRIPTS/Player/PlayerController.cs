@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _maxJumpCount = 2;      // so lan nhay toi da
     private int _currentJumpCount = 0;                   // so lan nhay hien tai
     [SerializeField] PlayerState _playerState = PlayerState.IDLE; // trang thai hien tai
+    public PlayerState playerState => _playerState; // getter trang thai nhan vat
     [SerializeField] AnimationControllerBase _anim;    // reference animation controller
     # endregion
 
