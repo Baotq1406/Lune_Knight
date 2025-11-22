@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Decor
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1236078131
+    locked: 0
+  - name: Decor
+    uniqueID: 3702157203
     locked: 0
   - name: Map
     uniqueID: 973657257
