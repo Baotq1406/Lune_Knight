@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Decor
+  - DecorFront
   layers:
   - Default
   - TransparentFX
@@ -46,11 +47,23 @@ TagManager:
   - name: Background
     uniqueID: 1236078131
     locked: 0
+  - name: DecorBack
+    uniqueID: 3148258469
+    locked: 0
   - name: Decor
     uniqueID: 3702157203
     locked: 0
+  - name: Coating
+    uniqueID: 273008497
+    locked: 0
   - name: Map
     uniqueID: 973657257
+    locked: 0
+  - name: DecorFront
+    uniqueID: 785298095
+    locked: 0
+  - name: DecorFrontFront
+    uniqueID: 2820921567
     locked: 0
   - name: Player
     uniqueID: 829669391
