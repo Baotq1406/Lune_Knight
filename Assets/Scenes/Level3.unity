@@ -65029,12 +65029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1994f48bcdfc15d4291d481b78612e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loopingBGs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _loopingBGs: []
   _baseSpeed: 1.5
   _configSpeed: 0.05
 --- !u!114 &2100218589
