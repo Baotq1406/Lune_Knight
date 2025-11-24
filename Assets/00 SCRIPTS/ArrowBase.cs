@@ -31,7 +31,7 @@ public class ArrowBase : MonoBehaviour
     IEnumerator AutoDestrust()
     {
         yield return new WaitForSeconds(_lifetime);
-        //this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        //Destroy(this.gameObject);
     }
 }

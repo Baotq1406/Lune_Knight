@@ -18,7 +18,6 @@ public class ObjectPoolingX : Singleton<ObjectPoolingX>
             _itemPool = _poolObjects[key];
         }
 
-
         foreach (GameObject g in _itemPool)
         {
             if (g.gameObject.activeSelf)
