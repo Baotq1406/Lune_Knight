@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
     void TryDash()
     {
         // kiem tra nhan shift va cooldown
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _dashCooldownTimer <= 0)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) && _dashCooldownTimer <= 0)
         {
             StartCoroutine(DashCoroutine());
         }

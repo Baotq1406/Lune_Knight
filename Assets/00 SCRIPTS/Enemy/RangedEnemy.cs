@@ -19,7 +19,7 @@ public class RangedEnemy : MonoBehaviour
 
     #region References
     [Header("References")]
-    //[SerializeField] private Animator _anim; // animator cua enemy
+    [SerializeField] private Animator _anim; // animator cua enemy
     [SerializeField] private EnemyPatrol enemyPatrol; // tham chieu toi script patrol
     #endregion
 
@@ -33,6 +33,7 @@ public class RangedEnemy : MonoBehaviour
             if (cooldownTimer >= attackCooldown)
             {
                 cooldownTimer = 0;
+                _anim.SetTrigger(CONSTANT.RANGED_ATTACK);
             }
         }
 
@@ -49,11 +50,10 @@ public class RangedEnemy : MonoBehaviour
                 new Vector3(boxCollider.bounds.size.x * _range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
                 0, Vector2.left, 0, playerLayer);
 
-        if (hit.collider != null)
-        {
-            Debug.LogError("Player Detected!"); // co the hien debug khi phat hien player
-        }
-
+        //if (hit.collider != null)
+        //{
+        //    Debug.LogError("Player Detected!"); // co the hien debug khi phat hien player
+        //}
         return hit.collider != null;
     }
 

@@ -14,9 +14,9 @@ public class EnemyMelee : MonoBehaviour
     #region Collider Parameters
     [Header("Collider Settings")]
     [SerializeField] private float _colliderDistance; // khoang cach collider so voi enemy
-    [SerializeField] private BoxCollider2D boxCollider; // collider cua enemy
-    [SerializeField] private LayerMask playerLayer; // layer cua player
-    private float cooldownTimer = Mathf.Infinity; // bo dem cooldown
+    [SerializeField] private BoxCollider2D _boxCollider; // collider cua enemy
+    [SerializeField] private LayerMask _playerLayer; // layer cua player
+    private float _cooldownTimer = Mathf.Infinity; // bo dem cooldown
     #endregion
 
     #region References
@@ -27,14 +27,14 @@ public class EnemyMelee : MonoBehaviour
 
     private void Update()
     {
-        cooldownTimer += Time.deltaTime; // tang bo dem theo thoi gian
+        _cooldownTimer += Time.deltaTime; // tang bo dem theo thoi gian
 
         // Tan cong khi player o trong tam nhin
         if (PlayerInSight())
         {
-            if (cooldownTimer >= _attackCooldown)
+            if (_cooldownTimer >= _attackCooldown)
             {
-                cooldownTimer = 0; // reset bo dem
+                _cooldownTimer = 0; // reset bo dem
                 _anim.SetTrigger(CONSTANT.MELEE_ATTACK); // kich hoat animation tan cong
             }
         }
@@ -49,15 +49,14 @@ public class EnemyMelee : MonoBehaviour
     {
         RaycastHit2D hit =
             Physics2D.BoxCast(
-                boxCollider.bounds.center + transform.right * _range * this.transform.localScale.x * _colliderDistance,
-                new Vector3(boxCollider.bounds.size.x * _range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
-                0, Vector2.left, 0, playerLayer);
+                _boxCollider.bounds.center + transform.right * _range * this.transform.localScale.x * _colliderDistance,
+                new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z),
+                0, Vector2.left, 0, _playerLayer);
 
-        if (hit.collider != null)
-        {
-            //Debug.LogError("Player Detected!"); // co the hien debug khi phat hien player
-        }
-
+        //if (hit.collider != null)
+        //{
+        //    Debug.LogError("Player Detected!"); // co the hien debug khi phat hien player
+        //}
         return hit.collider != null;
     }
 
@@ -66,8 +65,8 @@ public class EnemyMelee : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(
-            boxCollider.bounds.center + transform.right * _range * this.transform.localScale.x * _colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * _range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+            _boxCollider.bounds.center + transform.right * _range * this.transform.localScale.x * _colliderDistance,
+            new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z));
     }
 
     // Giam mau player neu player o trong tam nhin
