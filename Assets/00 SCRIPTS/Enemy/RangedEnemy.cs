@@ -6,23 +6,22 @@ public class RangedEnemy : MonoBehaviour
 {
     #region Attack Parameters
     [Header("Attack Parameters")]
-    [SerializeField] private float _attackCooldown;
-    [SerializeField] private float _range;
-    [SerializeField] private int _damage;
-    [SerializeField] private Transform _firePoint;
-    [SerializeField] private ArrowBase _arrowPrefab;
+    [SerializeField] private float _attackCooldown; // thoi gian cooldown giua cac dot tan cong
+    [SerializeField] private float _range; // khoang cach tan cong
+    [SerializeField] private Transform _firePoint; // diem ban mui ten
+    [SerializeField] private ArrowBase _arrowPrefab; // prefab mui ten
     #endregion
 
     #region Collider Parameters
     [Header("Collider Parameters")]
-    [SerializeField] private float _colliderDistance;
-    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private float _colliderDistance; // khoang cach collider so voi enemy
+    [SerializeField] private BoxCollider2D boxCollider; // collider cua enemy
     #endregion
 
     #region Player Layer
     [Header("Player Layer")]
-    [SerializeField] private LayerMask playerLayer;
-    private float cooldownTimer = Mathf.Infinity;
+    [SerializeField] private LayerMask playerLayer; // layer cua player
+    private float cooldownTimer = Mathf.Infinity; // bo dem cooldown
     #endregion
 
     #region References

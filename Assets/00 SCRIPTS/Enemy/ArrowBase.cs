@@ -6,8 +6,9 @@ public class ArrowBase : MonoBehaviour
 {
     [SerializeField] float _speed;
     [SerializeField] float _lifetime;
+    [SerializeField] int _damage;
 
-   //[SerializeField] GameObject _hitFX;
+    //[SerializeField] GameObject _hitFX;
 
     Rigidbody2D _rigi;
 
@@ -33,5 +34,15 @@ public class ArrowBase : MonoBehaviour
         yield return new WaitForSeconds(_lifetime);
         this.gameObject.SetActive(false);
         //Destroy(this.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(CONSTANT.PLAYER_TAG))
+        {
+            // xu ly sat thuong o day
+            GameManager.Instance.Player.TakeDamage(_damage, this.transform);
+        }
+        this.gameObject.SetActive(false);
     }
 }

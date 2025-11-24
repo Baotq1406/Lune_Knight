@@ -74,7 +74,8 @@ public class EnemyMelee : MonoBehaviour
     {
         if (PlayerInSight())
         {
-            Debug.LogError("Player Damaged!"); // co the thay bang code giam mau thuc te
+            //Debug.LogError("Player Damaged!"); // co the thay bang code giam mau thuc te
+            GameManager.Instance.Player.TakeDamage(_damage, this.transform);
         }
     }
 }

@@ -17,7 +17,7 @@ public class AnimationControllerUnity : AnimationControllerBase
     public override void UpdateAnimation(PlayerState playerState)
     {
         // duyet tat ca cac trang thai PlayerState
-        for (int i = 0; i <= (int)PlayerState.ATTACK; i++)
+        for (int i = 0; i <= (int)PlayerState.DEATH; i++)
         {
             string stateName = ((PlayerState)i).ToString(); // lay ten string cua PlayerState
 

@@ -4,43 +4,66 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    #region Movement
+    #region === References ===
+    [Header("References")]
+    [SerializeField] private AnimationControllerBase _anim;  // Bộ điều khiển animation của player
+    private Rigidbody2D _rigi;                               // Rigidbody để xử lý vật lý
+    #endregion
+
+
+    #region === Movement Settings ===
     [Header("Movement Settings")]
-    [SerializeField] private float _speed;             // toc do di chuyen         
-    [SerializeField] private float _jumpForce;         // luc nhay
-    [SerializeField] private float _fallMultiplier;    // dieu chinh roi nhanh hon
-    [SerializeField] private float _lowJumpMultiplier; // dieu chinh nhay thap hon
+    [SerializeField] private float _speed;                    // Tốc độ di chuyển ngang
+    [SerializeField] private float _jumpForce;                // Lực nhảy ban đầu
+    [SerializeField] private float _fallMultiplier;           // Hệ số rơi nhanh khi thả phím nhảy
+    [SerializeField] private float _lowJumpMultiplier;        // Hệ số giảm nhảy khi nhấn nhảy ngắn
+
+    [Header("Jump Settings")]
+    [SerializeField] private int _maxJumpCount = 2;           // Số lần nhảy tối đa (double jump)
+    private int _currentJumpCount = 0;                        // Số lần nhảy hiện tại
     #endregion
 
-    #region Dash Settings
+
+    #region === Dash Settings ===
     [Header("Dash Settings")]
-    [SerializeField] private float _dashSpeed = 10f;     // toc do dash
-    [SerializeField] private float _dashDuration = 0.2f; // thoi gian giu toc do dash
-    [SerializeField] private float _dashCooldown = 0.5f; // thoi gian hoi dash
-    private float _dashCooldownTimer = 0f;               // timer hoi dash
-    private bool _isDashing = false;                     // trang thai dash dang dien ra
-    private float _normalGravity;                        // luu gravity goc de reset sau dash
+    [SerializeField] private float _dashSpeed = 10f;          // Tốc độ trong khi dash
+    [SerializeField] private float _dashDuration = 0.2f;      // Thời gian duy trì tốc độ dash
+    [SerializeField] private float _dashCooldown = 0.5f;      // Thời gian hồi dash
+
+    private float _dashCooldownTimer = 0f;                    // Bộ đếm thời gian hồi dash
+    private bool _isDashing = false;                          // Trạng thái đang dash hay không
+    private float _normalGravity;                             // Lưu gravity ban đầu để reset sau khi dash
     #endregion
 
-    #region Attack Settings
+
+    #region === Attack Settings ===
     [Header("Attack Settings")]
-    [SerializeField] private float _attackDuration = 0.25f; // thoi gian tan cong
-    private bool _isAttacking = false;                     // trang thai tan cong
+    [SerializeField] private float _attackDuration = 0.25f;   // Thời gian thực hiện một đòn tấn công
+    [SerializeField] private float _damage = 1f;                  // Lượng
+    private bool _isAttacking = false;                        // Cờ kiểm tra player đang tấn công
+    private Coroutine _attackCoroutine = null;                // Coroutine xử lý tấn công
     #endregion
 
-    #region Player State
+
+    #region === Damage / Health ===
+    [Header("Health Settings")]
+    [SerializeField] private int _playerHealth = 5;           // Máu của người chơi
+    [SerializeField] private float _knockbackForce = 8f;      // Lực đẩy lùi khi bị thương
+    [SerializeField] private float _knockbackDuration = 0.15f;// Thời gian bị choáng/đẩy lùi
+
+    private bool _isHurt = false;                             // Đang trong trạng thái bị thương
+    private bool _isDead = false;                             // Player đã chết
+    private bool _isKnockback = false;                        // Đang bị knockback
+    #endregion
+
+
+    #region === Player State ===
     [Header("Player State")]
-    [SerializeField] private bool _isOnGrounded;         // kiem tra cham dat
-    [SerializeField] private int _maxJumpCount = 2;      // so lan nhay toi da
-    private int _currentJumpCount = 0;                   // so lan nhay hien tai
-    [SerializeField] PlayerState _playerState = PlayerState.IDLE; // trang thai hien tai
-    public PlayerState playerState => _playerState;      // getter trang thai nhan vat
-    [SerializeField] AnimationControllerBase _anim;    // reference animation controller
+    [SerializeField] private bool _isOnGrounded;              // Kiểm tra player đang chạm đất
+    [SerializeField] private PlayerState _playerState = PlayerState.IDLE; // Trạng thái hiện tại
+    public PlayerState playerState => _playerState;           // Getter cho trạng thái player
     #endregion
 
-
-
-    private Rigidbody2D _rigi;
 
     void Start()
     {
@@ -64,6 +87,12 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(transform.position, Vector2.down * 0.8f, Color.red); // ve ray kiem tra dat
 
+        if (_isKnockback)
+        {
+            _anim.UpdateAnimation(_playerState);
+            return; // không cho player tự điều khiển
+        }
+
         if (_dashCooldownTimer > 0) // giam timer cooldown
             _dashCooldownTimer -= Time.deltaTime;
     }
@@ -77,12 +106,28 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // kiem tra trang thai tan cong
         if (_isAttacking)
         {
             _playerState = PlayerState.ATTACK;
             return;
         }
 
+        // kiem tra trang thai bi thuong
+        if (_isHurt)
+        {
+            _playerState = PlayerState.HURT;
+            return;
+        }
+
+        // kiem tra trang thai chet
+        if (_isDead)
+        {
+            _playerState = PlayerState.DEATH;
+            return;
+        }
+
+        // kiem tra trang thai nhan vat
         if (!_isOnGrounded) // neu o tren khong
         {
             if (_rigi.velocity.y > 0)
@@ -194,20 +239,82 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(AttackCoroutine());
+            _attackCoroutine = StartCoroutine(AttackCoroutine());
         }
     }
-
     IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
-
         _rigi.velocity = Vector2.zero;
 
-        yield return new WaitForSeconds(_attackDuration); // cho den khi ket thuc attack
+        yield return new WaitForSeconds(_attackDuration);
 
         _isAttacking = false;
+        _attackCoroutine = null;
     }
+
+
+    // ------------------- NHAN SAT THUONG -------------------
+    public void TakeDamage(int damage, Transform enemyPos)
+    {
+        if (_isDead)
+            return;
+
+        _playerHealth -= damage;
+        Debug.LogError(_playerHealth);
+
+        // Hủy attack nếu đang bi attack
+        if (_isAttacking)
+        {
+            _isAttacking = false;
+
+            if (_attackCoroutine != null)
+            {
+                StopCoroutine(_attackCoroutine);
+                _attackCoroutine = null;
+            }
+        }
+
+        if (_playerHealth <= 0)
+        {
+            _isDead = true;
+        }
+        else
+        {
+            _isHurt = true;
+
+            StartCoroutine(DoKnockback(enemyPos));
+            StartCoroutine(ResetHurtState());
+        }
+    }
+
+
+    private IEnumerator ResetHurtState()
+    {
+        // Thời gian bị thương (có thể chỉnh sửa nếu muốn)
+        yield return new WaitForSeconds(0.2f);
+        _isHurt = false;
+    }
+
+    private IEnumerator DoKnockback(Transform enemyPos)
+    {
+        _isKnockback = true;
+
+        // hướng knockback: trái hoặc phải
+        float dir = transform.position.x < enemyPos.position.x ? -1 : 1;
+
+        float timer = 0f;
+
+        while (timer < _knockbackDuration)
+        {
+            _rigi.velocity = new Vector2(dir * _knockbackForce, _rigi.velocity.y);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        _isKnockback = false;
+    }
+
 
 
     // ------------------ KIEM TRA DAT --------------------
@@ -230,5 +337,7 @@ public class PlayerController : MonoBehaviour
         FALL,
         DASH,
         ATTACK,
+        HURT,
+        DEATH,
     }
 }               

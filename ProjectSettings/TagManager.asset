@@ -65,6 +65,9 @@ TagManager:
   - name: DecorFrontFront
     uniqueID: 2820921567
     locked: 0
+  - name: Enemy
+    uniqueID: 3583964649
+    locked: 0
   - name: Player
     uniqueID: 829669391
     locked: 0
