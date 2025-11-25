@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class EventReceiver : MonoBehaviour
 {
-    //[SerializeField] EnemyMelee _enemyMelee;
-    //[SerializeField] RangedEnemy _rangedEnemy;
-
-    public void MeleeAttack()
+    #region Player Attack Events
+    public void EnableAxeAttack()
     {
-        //_enemyMelee.DamagePlayer();
+        GameManager.Instance.Player.EnableAxeAttack();
+    }
+    public void DisableAxeAttack()
+    {
+        GameManager.Instance.Player.DisableAxeAttack();
+    }
+    #endregion
+
+    #region Enemy Attack Events
+    public void TriggerMeleeAttack()
+    {
         GameManager.Instance.EnemyMelee.DamagePlayer();
     }
 
-    public void RangedAttack()
+    public void TriggerRangedAttack()
     {
-        //_rangedEnemy.ShootArrow();
         GameManager.Instance.RangedEnemy.ShootArrow();
     }
+    #endregion
 }

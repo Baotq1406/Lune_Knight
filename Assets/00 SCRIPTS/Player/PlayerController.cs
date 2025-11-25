@@ -6,180 +6,185 @@ public class PlayerController : MonoBehaviour
 {
     #region === References ===
     [Header("References")]
-    [SerializeField] private AnimationControllerBase _anim;  // Bộ điều khiển animation của player
-    private Rigidbody2D _rigi;                               // Rigidbody để xử lý vật lý
+    [SerializeField] private AnimationControllerBase _anim;
+    private Rigidbody2D _rigi;
+    private CameraController _camera; // cache cho shake camera
     #endregion
-
 
     #region === Movement Settings ===
     [Header("Movement Settings")]
-    [SerializeField] private float _speed;                    // Tốc độ di chuyển ngang
-    [SerializeField] private float _jumpForce;                // Lực nhảy ban đầu
-    [SerializeField] private float _fallMultiplier;           // Hệ số rơi nhanh khi thả phím nhảy
-    [SerializeField] private float _lowJumpMultiplier;        // Hệ số giảm nhảy khi nhấn nhảy ngắn
+    [SerializeField] private float _speed; // toc do di chuyen
+    [SerializeField] private float _jumpForce; // luc nhay
+    [SerializeField] private float _fallMultiplier; // he so dieu chinh toc do roi
+    [SerializeField] private float _lowJumpMultiplier; // he so dieu chinh nhay thap
 
     [Header("Jump Settings")]
-    [SerializeField] private int _maxJumpCount = 2;           // Số lần nhảy tối đa (double jump)
-    private int _currentJumpCount = 0;                        // Số lần nhảy hiện tại
+    [SerializeField] private int _maxJumpCount = 2; // so lan nhay toi da
+    private int _currentJumpCount = 0; // so lan nhay hien tai
     #endregion
-
 
     #region === Dash Settings ===
     [Header("Dash Settings")]
-    [SerializeField] private float _dashSpeed = 10f;          // Tốc độ trong khi dash
-    [SerializeField] private float _dashDuration = 0.2f;      // Thời gian duy trì tốc độ dash
-    [SerializeField] private float _dashCooldown = 0.5f;      // Thời gian hồi dash
-
-    private float _dashCooldownTimer = 0f;                    // Bộ đếm thời gian hồi dash
-    private bool _isDashing = false;                          // Trạng thái đang dash hay không
-    private float _normalGravity;                             // Lưu gravity ban đầu để reset sau khi dash
+    [SerializeField] private float _dashSpeed = 10f; // toc do dash
+    [SerializeField] private float _dashDuration = 0.2f; // thoi gian dash
+    [SerializeField] private float _dashCooldown = 0.5f; // thoi gian hoi dash
+    private float _dashCooldownTimer = 0f; // bo dem hoi dash
+    private bool _isDashing = false; // trang thai dang dash
+    private float _normalGravity; // luu gia tri gravity binh thuong
     #endregion
-
 
     #region === Attack Settings ===
     [Header("Attack Settings")]
-    [SerializeField] private float _attackDuration = 0.25f;   // Thời gian thực hiện một đòn tấn công
-    [SerializeField] private float _damage = 1f;                  // Lượng
-    private bool _isAttacking = false;                        // Cờ kiểm tra player đang tấn công
-    private Coroutine _attackCoroutine = null;                // Coroutine xử lý tấn công
+    [SerializeField] private float _attackDuration = 0.25f; // thoi gian tan cong
+    [SerializeField] private float _damage = 1f; // luong sat thuong
+    private bool _isAttacking = false; // trang thai dang tan cong
+    private Coroutine _attackCoroutine = null;  // tham chieu toi coroutine tan cong
     #endregion
-
 
     #region === Damage / Health ===
     [Header("Health Settings")]
-    [SerializeField] private int _playerHealth = 5;           // Máu của người chơi
-    [SerializeField] private float _knockbackForce = 8f;      // Lực đẩy lùi khi bị thương
-    [SerializeField] private float _knockbackDuration = 0.15f;// Thời gian bị choáng/đẩy lùi
+    [SerializeField] private int _playerHealth = 5; // mau cua nhan vat
+    [SerializeField] private float _knockbackForce = 8f; // luc knockback khi bi danh
+    [SerializeField] private float _knockbackDuration = 0.15f; // thoi gian knockback
 
-    private bool _isHurt = false;                             // Đang trong trạng thái bị thương
-    private bool _isDead = false;                             // Player đã chết
-    private bool _isKnockback = false;                        // Đang bị knockback
+    [Header("Invincibility (I-Frame) Settings")]
+    [SerializeField] private float _invincibleDuration = 0.8f;    // thoi gian vo hieu hoa nhan sat thuong
+    private bool _isInvincible = false;                           // dang vo hieu hoa
+    [SerializeField] private float _cameraShakeDuration = 0.2f;    // thoi gian shake camera khi bi thuong
+    [SerializeField] private float _cameraShakeMagnitude = 0.1f;  // do manh shake camera
+
+    private bool _isHurt = false; // trang thai bi thuong
+    private bool _isDead = false; // trang thai chet
+    private bool _isKnockback = false; // trang thai bi knockback
     #endregion
-
 
     #region === Player State ===
     [Header("Player State")]
-    [SerializeField] private bool _isOnGrounded;              // Kiểm tra player đang chạm đất
-    [SerializeField] private PlayerState _playerState = PlayerState.IDLE; // Trạng thái hiện tại
-    public PlayerState playerState => _playerState;           // Getter cho trạng thái player
+    [SerializeField] private bool _isOnGrounded; // trang thai cham dat
+    [SerializeField] private PlayerState _playerState = PlayerState.IDLE; // trang thai hien tai cua nhan vat
+    public PlayerState playerState => _playerState; // ham get trang thai nhan vat
     #endregion
 
+    [SerializeField] GameObject _axeAttack; // hitbox ri
+    [SerializeField] TrailRenderer _dashTrail; // trail dash
 
     void Start()
     {
-        _rigi = GetComponent<Rigidbody2D>();
-        _normalGravity = _rigi.gravityScale; // luu gravity ban dau
+        _rigi = GetComponent<Rigidbody2D>(); // lay component Rigidbody2D
+        _normalGravity = _rigi.gravityScale; // luu lai gia tri gravity ban dau
+        if (_axeAttack != null)
+            _axeAttack.SetActive(false); // tat hitbox ri truoc khi choi
+        _camera = FindObjectOfType<CameraController>(); // cache camera controller
     }
 
     void Update()
     {
-        if (!_isDashing) // khong di chuyen binh thuong khi dash
+        // neu khong dang dash thi cho phep di chuyen
+        if (!_isDashing)
             Moving();
 
-        JumpCheck();    // kiem tra nhay    
-        TryDash();      // kiem tra nhan nut dash
+        JumpCheck(); // kiem tra nhay
+        TryDash();   // kiem tra dash
         TryAttack(); // kiem tra tan cong
 
-
-        UpdateState();  // cap nhat trang thai nhan vat
-        _anim.UpdateAnimation(_playerState); // update animation
-
+        UpdateState(); // cap nhat trang thai nhan vat
+        _anim.UpdateAnimation(_playerState); // cap nhat animation
 
         Debug.DrawRay(transform.position, Vector2.down * 0.8f, Color.red); // ve ray kiem tra dat
 
+        // neu dang bi knockback thi khong cho dieu khien
         if (_isKnockback)
         {
             _anim.UpdateAnimation(_playerState);
-            return; // không cho player tự điều khiển
+            return;
         }
 
-        if (_dashCooldownTimer > 0) // giam timer cooldown
-            _dashCooldownTimer -= Time.deltaTime;
+        // neu dang bi thuong, knockback, dash hoac tan cong thi khong cho di chuyen
+        if (_isHurt || _isKnockback || _isDashing || _isAttacking)
+        {
+            _rigi.velocity = new Vector2(0, _rigi.velocity.y);
+            // dam bao hitbox ri luon tat neu khong con tan cong
+            if (!_isAttacking && _axeAttack != null && _axeAttack.activeSelf)
+                _axeAttack.SetActive(false);
+            return;
+        }
+
+        if (_dashCooldownTimer > 0)
+            _dashCooldownTimer -= Time.deltaTime; // giam thoi gian hoi dash
+
+        // dam bao hitbox ri tat neu mat trang thai tan cong
+        if (!_isAttacking && _axeAttack != null && _axeAttack.activeSelf)
+            _axeAttack.SetActive(false);
     }
 
-    // ------------------- CAP NHAT TRANG THAI -------------------
+    // cap nhat trang thai nhan vat dua vao cac co
     void UpdateState()
     {
-        if (_isDashing) // neu dang dash
+        if (_isDashing)
         {
             _playerState = PlayerState.DASH;
             return;
         }
-
-        // kiem tra trang thai tan cong
         if (_isAttacking)
         {
             _playerState = PlayerState.ATTACK;
             return;
         }
-
-        // kiem tra trang thai bi thuong
         if (_isHurt)
         {
             _playerState = PlayerState.HURT;
             return;
         }
-
-        // kiem tra trang thai chet
         if (_isDead)
         {
             _playerState = PlayerState.DEATH;
             return;
         }
-
-        // kiem tra trang thai nhan vat
-        if (!_isOnGrounded) // neu o tren khong
+        if (!_isOnGrounded)
         {
-            if (_rigi.velocity.y > 0)
-                _playerState = PlayerState.JUMP; // len cao
-            else
-                _playerState = PlayerState.FALL; // roi
+            _playerState = _rigi.velocity.y > 0 ? PlayerState.JUMP : PlayerState.FALL;
         }
-        else // neu tren dat
+        else
         {
-            if (_rigi.velocity.x != 0)
-                _playerState = PlayerState.RUN; // chay
-            else
-                _playerState = PlayerState.IDLE; // dung yen
+            _playerState = _rigi.velocity.x != 0 ? PlayerState.RUN : PlayerState.IDLE;
         }
     }
 
-    // -------------------- DI CHUYEN ----------------------
+    // xu ly di chuyen ngang va quay mat nhan vat
     void Moving()
     {
         Vector2 movement = _rigi.velocity;
-        movement.x = Input.GetAxisRaw("Horizontal") * _speed; // lay input nguoi choi
+        movement.x = Input.GetAxisRaw("Horizontal") * _speed; // lay input ngang
         _rigi.velocity = movement;
 
-        // doi huong nhan vat theo chieu di chuyen
+        // quay mat nhan vat theo huong di chuyen
         if (_rigi.velocity.x > 0)
         {
-            Vector2 scale = transform.localScale;
+            var scale = transform.localScale;
             scale.x = Mathf.Abs(scale.x);
             transform.localScale = scale;
         }
         else if (_rigi.velocity.x < 0)
         {
-            Vector2 scale = transform.localScale;
+            var scale = transform.localScale;
             scale.x = -Mathf.Abs(scale.x);
             transform.localScale = scale;
         }
     }
 
-    // ----------------------- NHAY ------------------------
+    // kiem tra va xu ly nhay
     void JumpCheck()
     {
-        // Nhấn Space để nhảy 
+        // nhan space de nhay, chi duoc nhay toi da _maxJumpCount lan
         if (Input.GetKeyDown(KeyCode.Space) && _currentJumpCount < _maxJumpCount && !_isDashing)
         {
-            _rigi.velocity = new Vector2(_rigi.velocity.x, 0); // reset lực rơi cho lần nhảy tiếp theo
-            _rigi.AddForce(new Vector2(0, _jumpForce));
-
+            _rigi.velocity = new Vector2(_rigi.velocity.x, 0); // reset van toc Y
+            _rigi.AddForce(new Vector2(0, _jumpForce)); // them luc nhay
             _isOnGrounded = false;
             _currentJumpCount++;
         }
 
-        // Điều chỉnh rơi nhanh hơn và nhảy thấp hơn
+        // dieu chinh toc do roi va nhay thap
         if (_rigi.velocity.y < 0)
         {
             _rigi.velocity += Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.deltaTime;
@@ -190,145 +195,173 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ----------------------- DASH ------------------------
+    // kiem tra va xu ly dash
     void TryDash()
     {
-        // kiem tra nhan shift va cooldown
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) && _dashCooldownTimer <= 0)
         {
+            // neu dang tan cong thi huy tan cong khi bat dau dash
+            if (_isAttacking)
+                CancelAttack();
             StartCoroutine(DashCoroutine());
         }
     }
+
+    // coroutine xu ly dash
     IEnumerator DashCoroutine()
     {
         _isDashing = true;
-        _dashCooldownTimer = _dashCooldown; // reset cooldown
+        _dashCooldownTimer = _dashCooldown;
 
-        float dashDirection = transform.localScale.x > 0 ? 1 : -1; // xac dinh huong dash theo huong nhan vat
+        // bat trail khi dash
+        if (_dashTrail != null)
+            _dashTrail.emitting = true;
 
-        _rigi.gravityScale = 0;
+        float dashDirection = transform.localScale.x > 0 ? 1 : -1;
+        _rigi.gravityScale = 0; // tat gravity khi dash
 
         float dashTime = 0f;
-
-        // thuc hien dash trong khoang thoi gian dashDuration
         while (dashTime < _dashDuration)
         {
-            // lay input nguoi choi
             float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-            // neu nhan input nguoc chieu dash => ket thuc dash
+            // dung dash neu nguoi choi thay doi huong
             if ((dashDirection > 0 && horizontalInput < 0) || (dashDirection < 0 && horizontalInput > 0))
                 break;
 
-            // dat velocity dash
             _rigi.velocity = new Vector2(dashDirection * _dashSpeed, 0);
-
             dashTime += Time.deltaTime;
             yield return null;
         }
 
+        // khoi phuc gravity sau khi dash
         _rigi.gravityScale = _normalGravity;
         _isDashing = false;
+
+        // tat trail khi ket thuc dash
+        if (_dashTrail != null)
+            _dashTrail.emitting = false;
     }
 
-    // ------------------- ATTACK -------------------
+    // kiem tra va xu ly tan cong
     void TryAttack()
     {
         if (_isDashing || _isAttacking)
             return;
 
+        // nhan input tan cong
         if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
         {
             _attackCoroutine = StartCoroutine(AttackCoroutine());
         }
     }
+
+    // coroutine xu ly tan cong
     IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
-        _rigi.velocity = Vector2.zero;
-
+        _rigi.velocity = Vector2.zero; // dung nhan vat lai khi tan cong
         yield return new WaitForSeconds(_attackDuration);
-
-        _isAttacking = false;
-        _attackCoroutine = null;
+        // ket thuc tan cong
+        CancelAttack();
     }
 
+    // ham huy tan cong, tat hitbox
+    private void CancelAttack()
+    {
+        _isAttacking = false;
+        if (_attackCoroutine != null)
+        {
+            StopCoroutine(_attackCoroutine);
+            _attackCoroutine = null;
+        }
+        if (_axeAttack != null && _axeAttack.activeSelf)
+            _axeAttack.SetActive(false);
+    }
 
-    // ------------------- NHAN SAT THUONG -------------------
+    // bat hitbox, goi tu animation event
+    public void EnableAxeAttack()
+    {
+        if (_axeAttack != null)
+            _axeAttack.SetActive(true);
+    }
+
+    // tat hitbox, goi tu animation event
+    public void DisableAxeAttack()
+    {
+        if (_axeAttack != null)
+            _axeAttack.SetActive(false);
+    }
+
+    // nhan sat thuong, xu ly I-frame va shake camera
     public void TakeDamage(int damage, Transform enemyPos)
     {
-        if (_isDead)
+        if (_isDead || _isInvincible)
             return;
 
         _playerHealth -= damage;
-        Debug.LogError(_playerHealth);
 
-        // Hủy attack nếu đang bi attack
         if (_isAttacking)
         {
-            _isAttacking = false;
-
-            if (_attackCoroutine != null)
-            {
-                StopCoroutine(_attackCoroutine);
-                _attackCoroutine = null;
-            }
+            // huy tan cong ngay lap tuc neu dang tan cong
+            CancelAttack();
         }
 
         if (_playerHealth <= 0)
         {
             _isDead = true;
+            CancelAttack(); // tat hitbox khi chet
+            return;
         }
-        else
-        {
-            _isHurt = true;
 
-            StartCoroutine(DoKnockback(enemyPos));
-            StartCoroutine(ResetHurtState());
-        }
+        _isHurt = true;
+        StartCoroutine(DoKnockback(enemyPos)); // xu ly knockback
+        StartCoroutine(ResetHurtState()); // reset trang thai hurt
+        StartCoroutine(InvincibilityCoroutine()); // bat invincibility tam thoi
+        _camera?.Shake(_cameraShakeDuration, _cameraShakeMagnitude); // shake camera
     }
 
+    // coroutine vo hieu hoa nhan sat thuong tam thoi
+    private IEnumerator InvincibilityCoroutine()
+    {
+        _isInvincible = true;
+        yield return new WaitForSeconds(_invincibleDuration);
+        _isInvincible = false;
+    }
 
+    // coroutine reset trang thai bi thuong
     private IEnumerator ResetHurtState()
     {
-        // Thời gian bị thương (có thể chỉnh sửa nếu muốn)
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         _isHurt = false;
     }
 
+    // coroutine xu ly knockback khi bi danh
     private IEnumerator DoKnockback(Transform enemyPos)
     {
         _isKnockback = true;
-
-        // hướng knockback: trái hoặc phải
         float dir = transform.position.x < enemyPos.position.x ? -1 : 1;
-
         float timer = 0f;
-
         while (timer < _knockbackDuration)
         {
             _rigi.velocity = new Vector2(dir * _knockbackForce, _rigi.velocity.y);
             timer += Time.deltaTime;
             yield return null;
         }
-
         _isKnockback = false;
     }
 
-
-
-    // ------------------ KIEM TRA DAT --------------------
+    // kiem tra cham dat de reset so lan nhay
     private void OnCollisionEnter2D(Collision2D collision)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f);
         if (hit.collider != null)
         {
-            _isOnGrounded = true; // dat dat
-            _currentJumpCount = 0; // reset double jump
+            _isOnGrounded = true;
+            _currentJumpCount = 0;
         }
     }
 
-    // ---------------------- ENUM TRANG THAI ------------------
+    // enum trang thai nhan vat
     public enum PlayerState
     {
         IDLE,

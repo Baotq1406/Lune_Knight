@@ -25,6 +25,8 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private EnemyPatrol enemyPatrol; // tham chieu toi script patrol
     #endregion
 
+    [SerializeField] private int _enemyHealth = 100;
+
     private void Update()
     {
         _cooldownTimer += Time.deltaTime; // tang bo dem theo thoi gian
@@ -76,6 +78,18 @@ public class EnemyMelee : MonoBehaviour
         {
             //Debug.LogError("Player Damaged!"); // co the thay bang code giam mau thuc te
             GameManager.Instance.Player.TakeDamage(_damage, this.transform);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _enemyHealth -= damage;
+        Debug.LogError("Enemy Health: " + _enemyHealth);
+
+        if (_enemyHealth <= 0)
+        {
+            Debug.LogError("Enemy died");
+            this.transform.parent.gameObject.SetActive(false);
         }
     }
 }

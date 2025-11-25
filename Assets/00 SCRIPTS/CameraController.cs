@@ -8,6 +8,10 @@ public class CameraController : MonoBehaviour
     Transform _player;
     [SerializeField] Vector2 _camOffset;
     #endregion
+
+    private Vector3 _shakeOffset = Vector3.zero;
+    private Coroutine _shakeRoutine;
+
     void Start()
     {
         _player = GameManager.Instance.Player.transform;
@@ -15,12 +19,31 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        //Vector3 newPos = new Vector3(_player.position.x, _player.position.y, this.transform.position.z);
-        //this.transform.position = newPos;
+        if (_player == null) return;
 
-        // Thuc hien di chuyen camera theo player voi offset
-        Vector3 pos = _player.position + (Vector3)_camOffset;
+        Vector3 pos = _player.position + (Vector3)_camOffset + _shakeOffset;
         pos.z = Camera.main.transform.position.z;
         Camera.main.transform.position = pos;
     }
+
+    public void Shake(float duration, float magnitude)
+    {
+        if (_shakeRoutine != null)
+            StopCoroutine(_shakeRoutine);
+        _shakeRoutine = StartCoroutine(ShakeCoroutine(duration, magnitude));
+    }
+
+    private IEnumerator ShakeCoroutine(float duration, float magnitude)
+    {
+        float timer = 0f;
+        while (timer < duration)
+        {
+            _shakeOffset = (Vector3)Random.insideUnitCircle * magnitude;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        _shakeOffset = Vector3.zero;
+        _shakeRoutine = null;
+    }
 }
+        
