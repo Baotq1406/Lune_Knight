@@ -1,0 +1,1328 @@
+fileFormatVersion: 2
+guid: b4861ce36b4335549bfd0a9fe65f838d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 472
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1852f3d75034bbe468b090a040e3cca3
+      internalID: -882824174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 472
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd7a853d20b1b104b840b625ca2a2a96
+      internalID: 852159794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_2
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1eba09e2fe8286408e49fb3628cefd7
+      internalID: 1793569583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_3
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c22058b3b7ed2847baada86fd3bc9a7
+      internalID: -621808058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_4
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b9e8ce39964f164f9b46af479c955dc
+      internalID: -1039194720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_5
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 472
+        width: 66
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 550df8185f103a744884e9dff1c604b6
+      internalID: -1167442673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_6
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59f258b0890277b4bab64d71cadb6101
+      internalID: -1707168534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_7
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c3b6fcde373624b928f9b68b32e768
+      internalID: -131496965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_8
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc755c5119798fe49bc204e5d13943e6
+      internalID: -990799347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_9
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 472
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af7e41dc77550d74fbc8af0d8b5d9382
+      internalID: -1243919970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_10
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 344
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0f191b3a6354b744bb9198473102ea3
+      internalID: 1751656218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 344
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4b0934183657774590ef042a921dd96
+      internalID: -2126857480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 344
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 621e502bf94c949459604366dc35e6cb
+      internalID: -1368742075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_13
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 344
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8d7a980cb7174438be37e2c3073ff8
+      internalID: -687906898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_14
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 344
+        width: 64
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4d8205b7f7529a4a8c58a1aa95f94b4
+      internalID: 599727717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_15
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 344
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b08e35e7789c2a4f8ec7e842808a14e
+      internalID: 824311642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_16
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 344
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25343b75e45882e41bbfa314f6671f4d
+      internalID: -474385778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_17
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 343
+        width: 63
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b655998e1f71458488bd3c499ccc8913
+      internalID: -265840257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_18
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 341
+        width: 64
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d87a069cd433ace4fa5fd52f72e79dcd
+      internalID: 204174168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_19
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 299
+        width: 95
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aac794afa69e1345ae01af3eb4cd08b
+      internalID: -1729301130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_20
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 312
+        width: 96
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c946006f1fb2b5c46bf7f4eb52b7b230
+      internalID: 251308198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_21
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 319
+        width: 60
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1401efb08b0464697dc21aa0342d11
+      internalID: -31111815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_22
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 352
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75474b206d880aa47b50d4495094a10e
+      internalID: -1832105645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_23
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 326
+        width: 62
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd79d5ec197da644b976e2dcbe5b34fd
+      internalID: 286562076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_24
+      rect:
+        serializedVersion: 2
+        x: 1616
+        y: 352
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a7040e50cbd744c9b5024d78d622e5
+      internalID: -310287264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_25
+      rect:
+        serializedVersion: 2
+        x: 1686
+        y: 319
+        width: 56
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15357ae813295ec4896e0ba6f03b8531
+      internalID: -1571254565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_26
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 352
+        width: 33
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 837f078034b23f544b29ef320feeca76
+      internalID: 621601439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_27
+      rect:
+        serializedVersion: 2
+        x: 1827
+        y: 307
+        width: 43
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 653d177baf55caf458e550a3a7dc3ca4
+      internalID: 2003017831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_28
+      rect:
+        serializedVersion: 2
+        x: 1871
+        y: 352
+        width: 33
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a43d1a0e1ebd041804a61b7bcd4cea
+      internalID: -1277161003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_29
+      rect:
+        serializedVersion: 2
+        x: 1968
+        y: 304
+        width: 64
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 193674c81ae493f4e9cee6f69cc1b595
+      internalID: 653342307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_30
+      rect:
+        serializedVersion: 2
+        x: 2097
+        y: 306
+        width: 63
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5f1c4bdd2c2e5c47b499b288af34808
+      internalID: -2099631041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_31
+      rect:
+        serializedVersion: 2
+        x: 2225
+        y: 306
+        width: 63
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b6d30e9fce7b8842ac176f9b394c55b
+      internalID: -1251691569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_32
+      rect:
+        serializedVersion: 2
+        x: 2353
+        y: 304
+        width: 63
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7f49387e66c47f418c47d39e5c0136c
+      internalID: -1332402933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_33
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 304
+        width: 64
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 207c0a80cb244fc4f82937cc1ed68a47
+      internalID: -901586420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_34
+      rect:
+        serializedVersion: 2
+        x: 2608
+        y: 304
+        width: 64
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db5fd46580d93424a9d9717507b241ba
+      internalID: -308218901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_35
+      rect:
+        serializedVersion: 2
+        x: 2736
+        y: 304
+        width: 63
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc718d933a15134cbc46f93964e8336
+      internalID: 320825334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_36
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 178
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1044dcbb121161a43b0e25b61f36d7ce
+      internalID: -2120311118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_37
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 178
+        width: 63
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3d48598b97f8d34a9f209300b572adf
+      internalID: 134589079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_38
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 176
+        width: 64
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1c9b0d28735c6e4b949a7caa005b8b7
+      internalID: 1682289619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_39
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 178
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af4851f02725ee043b3748c8f5191b27
+      internalID: -1751906808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_40
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 178
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68e322c2e5afdb844b29c70e20d4b801
+      internalID: -2051138410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_41
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 50
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6cf8b2ac282ab44a909b7d96d9580db
+      internalID: 1160357609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_42
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 50
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69f541a210b49284f93cef2224bdc435
+      internalID: 1067542750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_43
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 50
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aaa1c0b366d2134fa88f5e73861d825
+      internalID: 1171827240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_44
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 50
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa674a6982c565b4e966d98552d81d4c
+      internalID: -1746761783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_45
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 50
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7c9a1ce9da5243409fb7eaaeffb38b6
+      internalID: -538384243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_46
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 50
+        width: 65
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf1ed05a8dddd704494ba81ef06d7e34
+      internalID: -192070036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_47
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 51
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caea00096d5e5ee4b8ebede7e7284b5e
+      internalID: 1910409771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_48
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 54
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cb3c7535b818d1479034041ca0ea503
+      internalID: 506948079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_49
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 56
+        width: 64
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c0964c2c820424cad7b13b6b040b26
+      internalID: 485241514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_50
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 61
+        width: 64
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf07a0abf1d266d4ebfe54a6f5014d06
+      internalID: -2072711975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_51
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 69
+        width: 63
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10c55e823610bf146a7cfed0587a1f33
+      internalID: -2106632843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_52
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 84
+        width: 63
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50808793e99255f4a8d1cbe0bdb2c977
+      internalID: -387942562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Axe_Ambient_53
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 88
+        width: 63
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28f21b3f24c977b4ea5c846ff037df00
+      internalID: 969029457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Trap_Axe_Ambient_0: -882824174
+      Trap_Axe_Ambient_1: 852159794
+      Trap_Axe_Ambient_10: 1751656218
+      Trap_Axe_Ambient_11: -2126857480
+      Trap_Axe_Ambient_12: -1368742075
+      Trap_Axe_Ambient_13: -687906898
+      Trap_Axe_Ambient_14: 599727717
+      Trap_Axe_Ambient_15: 824311642
+      Trap_Axe_Ambient_16: -474385778
+      Trap_Axe_Ambient_17: -265840257
+      Trap_Axe_Ambient_18: 204174168
+      Trap_Axe_Ambient_19: -1729301130
+      Trap_Axe_Ambient_2: 1793569583
+      Trap_Axe_Ambient_20: 251308198
+      Trap_Axe_Ambient_21: -31111815
+      Trap_Axe_Ambient_22: -1832105645
+      Trap_Axe_Ambient_23: 286562076
+      Trap_Axe_Ambient_24: -310287264
+      Trap_Axe_Ambient_25: -1571254565
+      Trap_Axe_Ambient_26: 621601439
+      Trap_Axe_Ambient_27: 2003017831
+      Trap_Axe_Ambient_28: -1277161003
+      Trap_Axe_Ambient_29: 653342307
+      Trap_Axe_Ambient_3: -621808058
+      Trap_Axe_Ambient_30: -2099631041
+      Trap_Axe_Ambient_31: -1251691569
+      Trap_Axe_Ambient_32: -1332402933
+      Trap_Axe_Ambient_33: -901586420
+      Trap_Axe_Ambient_34: -308218901
+      Trap_Axe_Ambient_35: 320825334
+      Trap_Axe_Ambient_36: -2120311118
+      Trap_Axe_Ambient_37: 134589079
+      Trap_Axe_Ambient_38: 1682289619
+      Trap_Axe_Ambient_39: -1751906808
+      Trap_Axe_Ambient_4: -1039194720
+      Trap_Axe_Ambient_40: -2051138410
+      Trap_Axe_Ambient_41: 1160357609
+      Trap_Axe_Ambient_42: 1067542750
+      Trap_Axe_Ambient_43: 1171827240
+      Trap_Axe_Ambient_44: -1746761783
+      Trap_Axe_Ambient_45: -538384243
+      Trap_Axe_Ambient_46: -192070036
+      Trap_Axe_Ambient_47: 1910409771
+      Trap_Axe_Ambient_48: 506948079
+      Trap_Axe_Ambient_49: 485241514
+      Trap_Axe_Ambient_5: -1167442673
+      Trap_Axe_Ambient_50: -2072711975
+      Trap_Axe_Ambient_51: -2106632843
+      Trap_Axe_Ambient_52: -387942562
+      Trap_Axe_Ambient_53: 969029457
+      Trap_Axe_Ambient_6: -1707168534
+      Trap_Axe_Ambient_7: -131496965
+      Trap_Axe_Ambient_8: -990799347
+      Trap_Axe_Ambient_9: -1243919970
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
