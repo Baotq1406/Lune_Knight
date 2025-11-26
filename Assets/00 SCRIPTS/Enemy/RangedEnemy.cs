@@ -28,17 +28,36 @@ public class RangedEnemy : MonoBehaviour
     [Header("References")]
     [SerializeField] private Animator _anim; // animator cua enemy
     [SerializeField] private EnemyPatrol enemyPatrol; // tham chieu toi script patrol
+    Rigidbody2D _rigi; // rigidbody cua enemy
     #endregion
 
+    [Header("Knockback Settings")]
+    [SerializeField] private float _knockbackForce = 3f;
+    [SerializeField] private float _knockbackDuration = 0.2f;
+    private bool _isKnockback = false;
+
+    [SerializeField] private int _enemyHealth = 100;
+    private bool _isDead = false;
+
+    private void Start()
+    {
+        _rigi = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
+        // dung het logic neu enemy da chet
+        if (_isDead) return;
+
         cooldownTimer += Time.deltaTime;
+
+        if (GameManager.Instance.Player.isDeadPlayer)
+            return;
 
         // Keep fire point aligned with facing
         AlignFirePointToFacing();
 
-        //Attack only when player in sight?
-        if (PlayerInSight())
+        //Attack only when player in sight and not knockback
+        if (PlayerInSight() && !_isKnockback)
         {
             if (cooldownTimer >= _attackCooldown)
             {
@@ -49,7 +68,7 @@ public class RangedEnemy : MonoBehaviour
 
         // tat/enemy patrol khi player o trong tam nhin
         if (enemyPatrol != null)
-            enemyPatrol.enabled = !PlayerInSight();
+            enemyPatrol.enabled = !PlayerInSight() && !_isKnockback && !_isDead;
     }
 
     // Make _firePoint face the same direction as the enemy (based on localScale.x)
@@ -77,6 +96,7 @@ public class RangedEnemy : MonoBehaviour
     // Ve hinh hinh chu nhat cua tam nhin tren editor de de quan sat
     private void OnDrawGizmos()
     {
+        if (boxCollider == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(
             boxCollider.bounds.center + transform.right * _range * this.transform.localScale.x * _colliderDistance,
@@ -98,4 +118,56 @@ public class RangedEnemy : MonoBehaviour
 
         //Debug.Log("Shoot Arrow");
     }
+
+    // === DAMAGE / KNOCKBACK / DEATH ===
+    public void TakeDamage(int damage)
+    {
+        if (_isDead) return;
+
+        _enemyHealth -= damage;
+        _anim.SetTrigger(CONSTANT.RANGED_HURT);
+
+        StartCoroutine(DoKnockback());
+
+        if (_enemyHealth <= 0)
+        {
+            _isDead = true;
+            // ngat tan cong ngay lap tuc
+            _anim.ResetTrigger(CONSTANT.RANGED_ATTACK);
+            StartCoroutine(Die());
+        }
+    }
+
+    private IEnumerator DoKnockback()
+    {
+        _isKnockback = true;
+
+        // day ra xa player
+        Transform player = GameManager.Instance.Player.transform;
+        float dir = transform.position.x < player.position.x ? -1f : 1f;
+        float timer = 0f;
+
+        while (timer < _knockbackDuration)
+        {
+            if (_rigi != null)
+                _rigi.velocity = new Vector2(dir * _knockbackForce, _rigi.velocity.y);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        if (_rigi != null)
+            _rigi.velocity = new Vector2(0, _rigi.velocity.y);
+        _isKnockback = false;
+    }
+
+    private IEnumerator Die()
+    {
+        _anim.SetTrigger(CONSTANT.RANGED_DEATH);
+        yield return new WaitForSeconds(0.8f);
+        if (this.transform.parent != null)
+            this.transform.parent.gameObject.SetActive(false);
+        else
+            this.gameObject.SetActive(false);
+    }
 }
+                            

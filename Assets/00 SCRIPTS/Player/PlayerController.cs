@@ -53,8 +53,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraShakeDuration = 0.2f;    // thoi gian shake camera khi bi thuong
     [SerializeField] private float _cameraShakeMagnitude = 0.1f;  // do manh shake camera
 
-    private bool _isHurt = false; // trang thai bi thuong
-    private bool _isDead = false; // trang thai chet
+    [SerializeField] private bool  _isHurt = false; // trang thai bi thuong
+    [SerializeField] private bool _isDead = false; // trang thai chet
+    public bool isDeadPlayer => _isDead; // ham get trang thai chet
     private bool _isKnockback = false; // trang thai bi knockback
     #endregion
 
@@ -79,14 +80,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // neu khong dang dash thi cho phep di chuyen
-        if (!_isDashing)
-            Moving();
+        if (!_isDead)
+        {
+            // neu khong dang dash thi cho phep di chuyen
+            if (!_isDashing)
+                Moving();
 
-        JumpCheck(); // kiem tra nhay
-        TryDash();   // kiem tra dash
-        TryAttack(); // kiem tra tan cong
+            JumpCheck(); // kiem tra nhay
+            TryDash();   // kiem tra dash
+            TryAttack(); // kiem tra tan cong
 
+        }
         UpdateState(); // cap nhat trang thai nhan vat
         _anim.UpdateAnimation(_playerState); // cap nhat animation
 
