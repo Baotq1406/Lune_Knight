@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,59 +6,74 @@ public class EnemyMelee : MonoBehaviour
 {
     #region Attack Parameters
     [Header("Attack Settings")]
-    private float _attackCooldown; // thoi gian cooldown giua cac dot tan cong
-    [SerializeField] private float _range; // khoang cach tan cong
-    [SerializeField] private int _damage; // luong sat thuong
+    private float _attackCooldown = 0; // thoi gian cooldown giua cac dot tan cong
+    [SerializeField] private float _range = 2f; // khoang cach tan cong
+    [SerializeField] private int _damage = 10; // luong sat thuong
+    //private bool _isAttacking = false; // trang thai dang attack
     #endregion
 
     #region Collider Parameters
     [Header("Collider Settings")]
-    [SerializeField] private float _colliderDistance; // khoang cach collider so voi enemy
-    [SerializeField] private BoxCollider2D _boxCollider; // collider cua enemy
-    [SerializeField] private LayerMask _playerLayer; // layer cua player
-    private float _cooldownTimer = Mathf.Infinity; // bo dem cooldown
+    [SerializeField] private float _colliderDistance = 0.5f;
+    [SerializeField] private BoxCollider2D _boxCollider;
+    [SerializeField] private LayerMask _playerLayer;
+    private float _cooldownTimer = Mathf.Infinity;
     #endregion
 
     #region References
     [Header("References")]
-    [SerializeField] private Animator _anim; // animator cua enemy
-    [SerializeField] private EnemyPatrol enemyPatrol; // tham chieu toi script patrol
+    [SerializeField] private Animator _anim;
+    [SerializeField] private EnemyPatrol enemyPatrol;
+    private Rigidbody2D _rigi;
     #endregion
 
+    [Header("Knockback Settings")]
+    [SerializeField] private float _knockbackForce = 3f;
+    [SerializeField] private float _knockbackDuration = 0.2f;
+    private bool _isKnockback = false;
+
     [SerializeField] private int _enemyHealth = 100;
+    private bool _isDead = false;
+
+    private void Awake()
+    {
+        _rigi = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        _cooldownTimer += Time.deltaTime; // tang bo dem theo thoi gian
+        //Debug.Log("Player dead: " + GameManager.Instance.Player.isDeadPlayer);
+        if (_isDead) return;
 
-        // Tan cong khi player o trong tam nhin
-        if (PlayerInSight())
+        if (GameManager.Instance.Player.isDeadPlayer)
+            return;
+
+        _cooldownTimer += Time.deltaTime;
+
+        // Chi tan cong khi player o trong tam nhin va khong dang attack hoac knockback
+        if (PlayerInSight() && !_isKnockback)
         {
             if (_cooldownTimer >= _attackCooldown)
             {
-                _cooldownTimer = 0; // reset bo dem
-                _anim.SetTrigger(CONSTANT.MELEE_ATTACK); // kich hoat animation tan cong
+                _cooldownTimer = 0;
+                _anim.SetTrigger(CONSTANT.MELEE_ATTACK); // kich hoat animation attack
             }
         }
 
-        // tat/enemy patrol khi player o trong tam nhin
+        // Tat patrol khi player o trong tam nhin hoac knockback hoac da chet
         if (enemyPatrol != null)
-            enemyPatrol.enabled = !PlayerInSight();
+            enemyPatrol.enabled = !PlayerInSight() && !_isKnockback && !_isDead;
     }
 
-    // kiem tra xem player co trong tam nhin hay khong
+    // Kiem tra player co trong tam nhin khong (chi tinh theo facing)
     private bool PlayerInSight()
     {
-        RaycastHit2D hit =
-            Physics2D.BoxCast(
-                _boxCollider.bounds.center + transform.right * _range * this.transform.localScale.x * _colliderDistance,
-                new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z),
-                0, Vector2.left, 0, _playerLayer);
+        Vector2 facingDir = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        RaycastHit2D hit = Physics2D.BoxCast(
+            _boxCollider.bounds.center + (Vector3)(facingDir * _range * _colliderDistance),
+            new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z),
+            0, Vector2.zero, 0, _playerLayer);
 
-        //if (hit.collider != null)
-        //{
-        //    Debug.LogError("Player Detected!"); // co the hien debug khi phat hien player
-        //}
         return hit.collider != null;
     }
 
@@ -71,25 +86,55 @@ public class EnemyMelee : MonoBehaviour
             new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z));
     }
 
-    // Giam mau player neu player o trong tam nhin
+    // Giam mau player
     public void DamagePlayer()
     {
         if (PlayerInSight())
         {
-            //Debug.LogError("Player Damaged!"); // co the thay bang code giam mau thuc te
             GameManager.Instance.Player.TakeDamage(_damage, this.transform);
         }
     }
 
+    // Nhận sát thương
     public void TakeDamage(int damage)
     {
+        if (_isDead) return;
+
         _enemyHealth -= damage;
-        Debug.LogError("Enemy Health: " + _enemyHealth);
+        _anim.SetTrigger(CONSTANT.MELEE_HURT);
+
+        StartCoroutine(DoKnockback());
 
         if (_enemyHealth <= 0)
         {
-            Debug.LogError("Enemy died");
-            this.transform.parent.gameObject.SetActive(false);
+            _isDead = true;
+            StartCoroutine(Die());
         }
+    }
+
+    // Knockback
+    private IEnumerator DoKnockback()
+    {
+        _isKnockback = true;
+
+        float dir = transform.position.x < GameManager.Instance.Player.transform.position.x ? -1 : 1;
+        float timer = 0f;
+
+        while (timer < _knockbackDuration)
+        {
+            _rigi.velocity = new Vector2(dir * _knockbackForce, _rigi.velocity.y);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        _rigi.velocity = new Vector2(0, _rigi.velocity.y);
+        _isKnockback = false;
+    }
+    // Enemy chet
+    private IEnumerator Die()
+    {
+        _anim.SetTrigger(CONSTANT.MELEE_DEATH);
+        yield return new WaitForSeconds(0.8f);
+        this.transform.parent.gameObject.SetActive(false);
     }
 }
