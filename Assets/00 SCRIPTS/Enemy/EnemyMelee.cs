@@ -135,6 +135,11 @@ public class EnemyMelee : MonoBehaviour
     {
         _anim.SetTrigger(CONSTANT.MELEE_DEATH);
         yield return new WaitForSeconds(0.8f);
-        this.transform.parent.gameObject.SetActive(false);
+
+        // tat doi tuong (uu tien tat parent neu co)
+        if (this.transform.parent != null)
+            this.transform.parent.gameObject.SetActive(false);
+        else
+            this.gameObject.SetActive(false);
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Decor
   - DecorFront
   - Enemy
+  - Orc_Enemy
+  - Archer_Enemy
   - Bear Trap
   - Spike Trap
   - Axe Trap
