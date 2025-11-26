@@ -1,7 +1,12 @@
 public static class CONSTANT 
 {
     public static string PLAYER_TAG = "Player"; // tag cua player
+
+    #region Enemy Tags
     public static string ENEMY_TAG = "Enemy"; // tag cua enemy
+    public static string ENEMY_ORC_TAG = "Orc_Enemy"; 
+    public static string ENEMY_ARCHER_TAG = "Archer_Enemy";
+    #endregion 
 
     #region Enemy Animator Parameters
     public static string IS_RUNNING = "isRunning"; // animation chay
