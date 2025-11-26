@@ -1,0 +1,448 @@
+fileFormatVersion: 2
+guid: 1023868b4e9339947bd5768a8dd56a9d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 33
+        width: 25
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a35d75034c59e9443a7d02c635f8ae3a
+      internalID: -1691629910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 33
+        width: 26
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cdf5a3e08848e14d9145905882643fc
+      internalID: 956741586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_2
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 33
+        width: 25
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 124ce420ea053bc4c94a87a9262ca5bb
+      internalID: -1378309731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_3
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 33
+        width: 25
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0ce3f5c8f9c7034e820bd51154dff28
+      internalID: -770414938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_4
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 33
+        width: 24
+        height: 70
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77e2dce1db19d8747b10b3e5b0b80091
+      internalID: -1471429634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_5
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 33
+        width: 22
+        height: 74
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9053983f1a63e6a4e954e9af47068853
+      internalID: 734778726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_6
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 23
+        width: 65
+        height: 83
+      alignment: 9
+      pivot: {x: 0.1585562, y: -0.012733092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36a9210ac9a4f7b4287483398958bde3
+      internalID: 1048864929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_7
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 24
+        width: 61
+        height: 53
+      alignment: 9
+      pivot: {x: 0.18814337, y: -0.019941403}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 489f8f556d729fe41915b67ad4d8c340
+      internalID: -1272122206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_8
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 24
+        width: 56
+        height: 52
+      alignment: 9
+      pivot: {x: 0.19804382, y: -0.04064868}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a895d7b87fcdf9499f1a177071b59b7
+      internalID: 1538731730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_9
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 24
+        width: 56
+        height: 52
+      alignment: 9
+      pivot: {x: 0.19804382, y: -0.02032489}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de3dafdaaf4f72d4a8996b42ceeee443
+      internalID: -2014529195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_10
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 33
+        width: 61
+        height: 43
+      alignment: 9
+      pivot: {x: 0.20547035, y: -0.024577873}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a9b450b35b81a94e8ebb3855e8a41f4
+      internalID: -891118489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_11
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 33
+        width: 53
+        height: 48
+      alignment: 9
+      pivot: {x: 0.2208344, y: -0.022018513}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 187f7cda755b5364e9ba40a5a6397c97
+      internalID: 1268477942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_12
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 33
+        width: 31
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdfe4122d10a5fc458c21665a70b6ddc
+      internalID: 1116532066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_SwordsmannTrap_Ambient_13
+      rect:
+        serializedVersion: 2
+        x: 1698
+        y: 33
+        width: 25
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eef39f5836918a40af3f927cde08570
+      internalID: -1234894342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Trap_SwordsmannTrap_Ambient_0: -1691629910
+      Trap_SwordsmannTrap_Ambient_1: 956741586
+      Trap_SwordsmannTrap_Ambient_10: -891118489
+      Trap_SwordsmannTrap_Ambient_11: 1268477942
+      Trap_SwordsmannTrap_Ambient_12: 1116532066
+      Trap_SwordsmannTrap_Ambient_13: -1234894342
+      Trap_SwordsmannTrap_Ambient_2: -1378309731
+      Trap_SwordsmannTrap_Ambient_3: -770414938
+      Trap_SwordsmannTrap_Ambient_4: -1471429634
+      Trap_SwordsmannTrap_Ambient_5: 734778726
+      Trap_SwordsmannTrap_Ambient_6: 1048864929
+      Trap_SwordsmannTrap_Ambient_7: -1272122206
+      Trap_SwordsmannTrap_Ambient_8: 1538731730
+      Trap_SwordsmannTrap_Ambient_9: -2014529195
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

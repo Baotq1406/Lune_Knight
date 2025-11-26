@@ -10,6 +10,11 @@ TagManager:
   - Enemy
   - Orc_Enemy
   - Archer_Enemy
+  - Bear Trap
+  - Spike Trap
+  - Axe Trap
+  - Floor Spike Trap
+  - Swords Man Trap
   layers:
   - Default
   - TransparentFX
@@ -21,7 +26,7 @@ TagManager:
   - Player
   - Arrow
   - Axe
-  - 
+  - Trap
   - 
   - 
   - 
@@ -70,6 +75,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 3583964649
+    locked: 0
+  - name: Trap
+    uniqueID: 2851764849
     locked: 0
   - name: Player
     uniqueID: 829669391
