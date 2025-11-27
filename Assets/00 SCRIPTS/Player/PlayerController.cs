@@ -38,8 +38,10 @@ public class PlayerController : MonoBehaviour
     #region === Attack Settings ===
     [Header("Attack Settings")]
     [SerializeField] private float _attackDuration = 0.25f; // thoi gian tan cong
+    [SerializeField] private float _attackCooldown = 0.5f; // thoi gian cooldown giua cac lan tan cong
     [SerializeField] GameObject _axeAttack; // hitbox Axe Attack
     private bool _isAttacking = false; // trang thai dang tan cong
+    private float _attackCooldownTimer = 0f; // bo dem cooldown tan cong
     private Coroutine _attackCoroutine = null;  // tham chieu toi coroutine tan cong
     #endregion
 
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour
             TryAttack(); // kiem tra tan cong
 
         }
-        UpdateState(); // cap nhat trang thai nhan vat
+        UpdateState(); // cap nhap trang thai nhan vat
         _anim.UpdateAnimation(_playerState); // cap nhat animation
 
         Debug.DrawRay(transform.position, Vector2.down * 0.8f, Color.red); // ve ray kiem tra dat
@@ -126,6 +128,9 @@ public class PlayerController : MonoBehaviour
 
         if (_dashCooldownTimer > 0)
             _dashCooldownTimer -= Time.deltaTime; // giam thoi gian hoi dash
+
+        if (_attackCooldownTimer > 0)
+            _attackCooldownTimer -= Time.deltaTime; // giam thoi gian hoi attack
 
         // dam bao hitbox ri tat neu mat trang thai tan cong
         if (!_isAttacking && _axeAttack != null && _axeAttack.activeSelf)
@@ -266,7 +271,7 @@ public class PlayerController : MonoBehaviour
     // kiem tra va xu ly tan cong
     void TryAttack()
     {
-        if (_isDashing || _isAttacking)
+        if (_isDashing || _isAttacking || _attackCooldownTimer > 0)
             return;
 
         // nhan input tan cong
@@ -280,6 +285,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
+        _attackCooldownTimer = _attackCooldown; // bat dau cooldown
         _rigi.velocity = Vector2.zero; // dung nhan vat lai khi tan cong
         yield return new WaitForSeconds(_attackDuration);
         // ket thuc tan cong
