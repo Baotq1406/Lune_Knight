@@ -142,10 +142,27 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
+    // Kiểm tra xem player có đang ở phía sau enemy không
+    private bool IsPlayerBehind()
+    {
+        if (GameManager.Instance.Player == null) return false;
+
+        float playerDirection = GameManager.Instance.Player.transform.position.x - transform.position.x;
+        float enemyFacing = transform.localScale.x;
+
+        // Player ở phía sau nếu:
+        // - Enemy quay phải (scale.x > 0) và player ở bên trái (playerDirection < 0)
+        // - Enemy quay trái (scale.x < 0) và player ở bên phải (playerDirection > 0)
+        return (enemyFacing > 0 && playerDirection < 0) || (enemyFacing < 0 && playerDirection > 0);
+    }
+
     // coroutine knockback - day enemy ra xa player
     private IEnumerator DoKnockback()
     {
         _isKnockback = true;
+
+        // Kiểm tra xem player có ở phía sau không trước khi knockback
+        bool wasPlayerBehind = IsPlayerBehind();
 
         // tinh huong day lui (nguoc voi huong player)
         Transform player = GameManager.Instance.Player.transform;
@@ -165,7 +182,33 @@ public class RangedEnemy : MonoBehaviour
         if (_rigi != null)
             _rigi.velocity = new Vector2(0, _rigi.velocity.y);
 
+        // Chỉ quay mặt về phía người chơi nếu bị tấn công từ phía sau
+        if (wasPlayerBehind)
+        {
+            FacePlayer();
+        }
+
         _isKnockback = false;
+    }
+
+    // Quay mặt enemy về phía người chơi
+    private void FacePlayer()
+    {
+        if (GameManager.Instance.Player == null) return;
+
+        float playerDirection = GameManager.Instance.Player.transform.position.x - transform.position.x;
+        
+        // Nếu player ở bên phải (playerDirection > 0) thì scale.x dương
+        // Nếu player ở bên trái (playerDirection < 0) thì scale.x âm
+        float newScaleX = playerDirection > 0 ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x);
+        
+        transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
+        
+        // Cập nhật hướng trong EnemyPatrol để raycast bắn đúng hướng
+        if (enemyPatrol != null)
+        {
+            enemyPatrol.UpdateFacingDirection();
+        }
     }
 
     // coroutine chet - choi animation roi tat doi tuong

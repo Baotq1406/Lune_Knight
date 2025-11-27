@@ -103,6 +103,7 @@ public class EnemyMelee : MonoBehaviour
         if (_isDead) return;
 
         _enemyHealth -= damage;
+        Debug.LogError("Enemy heal:" + _enemyHealth);
         _anim.SetTrigger(CONSTANT.MELEE_HURT);
 
         StartCoroutine(DoKnockback());
