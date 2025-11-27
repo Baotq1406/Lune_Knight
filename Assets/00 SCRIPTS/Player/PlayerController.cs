@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro.Examples;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -31,19 +32,29 @@ public class PlayerController : MonoBehaviour
     private float _dashCooldownTimer = 0f; // bo dem hoi dash
     private bool _isDashing = false; // trang thai dang dash
     private float _normalGravity; // luu gia tri gravity binh thuong
+    [SerializeField] TrailRenderer _dashTrail; // trail dash
     #endregion
 
     #region === Attack Settings ===
     [Header("Attack Settings")]
     [SerializeField] private float _attackDuration = 0.25f; // thoi gian tan cong
-    [SerializeField] private float _damage = 1f; // luong sat thuong
+    [SerializeField] GameObject _axeAttack; // hitbox Axe Attack
     private bool _isAttacking = false; // trang thai dang tan cong
     private Coroutine _attackCoroutine = null;  // tham chieu toi coroutine tan cong
     #endregion
 
-    #region === Damage / Health ===
-    [Header("Health Settings")]
-    [SerializeField] private int _playerHealth = 5; // mau cua nhan vat
+    #region === Damage / Health/ Knockback===
+    [Header("Healing / Soul Settings")]
+    [SerializeField] private int _maxHealth = 100;           // Máu tối đa
+    [SerializeField] private int _currentHealth;           // Máu hiện tại
+    [SerializeField] private int _healAmount = 1;          // Số máu hồi mỗi lần
+    [SerializeField] private int _maxSoul = 5;             // Năng lượng tối đa
+    [SerializeField] private int _currentSoul = 0;         // Năng lượng hiện tại
+    [SerializeField] private float _healCooldown = 0.5f;  // Cooldown hồi máu
+    [SerializeField] private GameObject _healVFX;          // Hiệu ứng hồi máu
+    private bool _isHealing = false;
+
+    [Header("Knockback Settings")]
     [SerializeField] private float _knockbackForce = 8f; // luc knockback khi bi danh
     [SerializeField] private float _knockbackDuration = 0.15f; // thoi gian knockback
 
@@ -52,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private bool _isInvincible = false;                           // dang vo hieu hoa
     [SerializeField] private float _cameraShakeDuration = 0.2f;    // thoi gian shake camera khi bi thuong
     [SerializeField] private float _cameraShakeMagnitude = 0.1f;  // do manh shake camera
-
+    [SerializeField] CameraController _cameraController; // tham chieu toi camera controller
     [SerializeField] private bool  _isHurt = false; // trang thai bi thuong
     [SerializeField] private bool _isDead = false; // trang thai chet
     public bool isDeadPlayer => _isDead; // ham get trang thai chet
@@ -66,16 +77,16 @@ public class PlayerController : MonoBehaviour
     public PlayerState playerState => _playerState; // ham get trang thai nhan vat
     #endregion
 
-    [SerializeField] GameObject _axeAttack; // hitbox ri
-    [SerializeField] TrailRenderer _dashTrail; // trail dash
-
     void Start()
     {
         _rigi = GetComponent<Rigidbody2D>(); // lay component Rigidbody2D
         _normalGravity = _rigi.gravityScale; // luu lai gia tri gravity ban dau
         if (_axeAttack != null)
             _axeAttack.SetActive(false); // tat hitbox ri truoc khi choi
-        _camera = FindObjectOfType<CameraController>(); // cache camera controller
+
+        _currentHealth = _maxHealth; // khoi tao mau
+
+        //_camera = FindObjectOfType<CameraController>(); // cache camera controller
     }
 
     void Update()
@@ -119,6 +130,12 @@ public class PlayerController : MonoBehaviour
         // dam bao hitbox ri tat neu mat trang thai tan cong
         if (!_isAttacking && _axeAttack != null && _axeAttack.activeSelf)
             _axeAttack.SetActive(false);
+
+        if (!_isHurt && !_isDead && !_isDashing && !_isAttacking)
+        {
+            if (Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(2)) // phím hồi máu
+                HealWithSoul();
+        }
     }
 
     // cap nhat trang thai nhan vat dua vao cac co
@@ -302,8 +319,8 @@ public class PlayerController : MonoBehaviour
         if (_isDead || _isInvincible)
             return;
 
-        _playerHealth -= damage;
-        Debug.LogError("Player Health: " + _playerHealth);
+        _currentHealth -= damage;
+        Debug.LogError("Player Health: " + _currentHealth);
 
         if (_isAttacking)
         {
@@ -311,9 +328,10 @@ public class PlayerController : MonoBehaviour
             CancelAttack();
         }
 
-        if (_playerHealth <= 0)
+        if (_currentHealth <= 0)
         {
             _isDead = true;
+            _rigi.velocity = Vector2.zero; // dung nhan vat lai khi chet
             CancelAttack(); // tat hitbox khi chet
             return;
         }
@@ -322,7 +340,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DoKnockback(enemyPos)); // xu ly knockback
         StartCoroutine(ResetHurtState()); // reset trang thai hurt
         StartCoroutine(InvincibilityCoroutine()); // bat invincibility tam thoi
-        _camera?.Shake(_cameraShakeDuration, _cameraShakeMagnitude); // shake camera
+        _cameraController?.Shake(_cameraShakeDuration, _cameraShakeMagnitude); // shake camera
     }
 
     // coroutine vo hieu hoa nhan sat thuong tam thoi
@@ -364,6 +382,54 @@ public class PlayerController : MonoBehaviour
             _isOnGrounded = true;
             _currentJumpCount = 0;
         }
+    }
+
+    // ham hoi mau, goi tu item heal
+    public void GainSoul(int amount)
+    {
+        _currentSoul += amount;
+        if (_currentSoul > _maxSoul)
+            _currentSoul = _maxSoul;
+
+        Debug.Log("Soul: " + _currentSoul + "/" + _maxSoul);
+    }
+
+    // ham hoi mau bang nang luong
+    public void HealWithSoul()
+    {
+        // dieu kien de hoi mau
+        if (_isDead || _isHealing || _currentSoul < _maxSoul || _currentHealth >= _maxHealth)
+            return;
+
+        _isHealing = true;
+
+        if (_currentSoul == _maxSoul)
+        {
+            _currentHealth += _healAmount;
+        }
+
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        // hien thi hieu ung hoi mau
+        if (_healVFX != null)
+        {
+            Instantiate(_healVFX, transform.position, Quaternion.identity);
+        }
+
+        _currentSoul = 0; 
+
+        Debug.Log("Healed! Health: " + _currentHealth + ", Soul: " + _currentSoul);
+
+        StartCoroutine(ResetHealState());
+    }
+
+    private IEnumerator ResetHealState()
+    {
+        yield return new WaitForSeconds(_healCooldown);
+        _isHealing = false;
     }
 
     // enum trang thai nhan vat

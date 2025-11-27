@@ -13,6 +13,7 @@ public class AxeAttack : MonoBehaviour
             Debug.LogError("AxeAttack hit enemy");
             // xu ly sat thuong o day
             GameManager.Instance.EnemyMelee.TakeDamage(_attackDamage);
+            GameManager.Instance.Player.GainSoul(1);
         }
 
         if (collision.CompareTag(CONSTANT.ENEMY_ARCHER_TAG))
@@ -20,6 +21,7 @@ public class AxeAttack : MonoBehaviour
             Debug.LogError("AxeAttack hit enemy");
             // xu ly sat thuong o day
             GameManager.Instance.RangedEnemy.TakeDamage(_attackDamage);
+            GameManager.Instance.Player.GainSoul(1);
         }
     }
 }

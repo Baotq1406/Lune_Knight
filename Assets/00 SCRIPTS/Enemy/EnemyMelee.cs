@@ -6,7 +6,7 @@ public class EnemyMelee : MonoBehaviour
 {
     #region Attack Parameters
     [Header("Attack Settings")]
-    private float _attackCooldown = 0; // thoi gian cooldown giua cac dot tan cong
+    [SerializeField] private float _attackCooldown = 1.5f; // thoi gian cooldown giua cac dot tan cong (thay đổi từ 0 sang 1.5f)
     [SerializeField] private float _range = 2f; // khoang cach tan cong
     [SerializeField] private int _damage = 10; // luong sat thuong
     //private bool _isAttacking = false; // trang thai dang attack
@@ -70,11 +70,23 @@ public class EnemyMelee : MonoBehaviour
     // Kiem tra player co trong tam nhin khong (chi tinh theo facing)
     private bool PlayerInSight()
     {
+          if (_boxCollider == null)
+          {
+    //        Debug.LogWarning("BoxCollider is null on " + gameObject.name);
+              return false;
+          }
+
         Vector2 facingDir = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         RaycastHit2D hit = Physics2D.BoxCast(
             _boxCollider.bounds.center + (Vector3)(facingDir * _range * _colliderDistance),
             new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z),
             0, Vector2.zero, 0, _playerLayer);
+
+        // Debug để kiểm tra phát hiện
+        //if (hit.collider != null)
+        //{
+        //    Debug.Log($"[{gameObject.name}] Detected: {hit.collider.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+        //}
 
         return hit.collider != null;
     }
