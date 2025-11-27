@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour
             _axeAttack.SetActive(false); // tat hitbox ri truoc khi choi
 
         _currentHealth = _maxHealth; // khoi tao mau
+        UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth); // cap nhat UI mau
+
+        _currentSoul = 0; // khoi tao nang luong
+        UIManager.Instance.UpdateSoulSlider(_currentSoul, _maxSoul); // cap nhat UI soul
 
         //_camera = FindObjectOfType<CameraController>(); // cache camera controller
     }
@@ -326,7 +330,8 @@ public class PlayerController : MonoBehaviour
             return;
 
         _currentHealth -= damage;
-        Debug.LogError("Player Health: " + _currentHealth);
+        UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth); // cap nhat UI mau
+        //Debug.LogError("Player Health: " + _currentHealth);
 
         if (_isAttacking)
         {
@@ -397,7 +402,9 @@ public class PlayerController : MonoBehaviour
         if (_currentSoul > _maxSoul)
             _currentSoul = _maxSoul;
 
-        Debug.Log("Soul: " + _currentSoul + "/" + _maxSoul);
+        UIManager.Instance.UpdateSoulSlider(_currentSoul, _maxSoul); // cap nhat UI soul
+
+        //Debug.Log("Soul: " + _currentSoul + "/" + _maxSoul);
     }
 
     // ham hoi mau bang nang luong
@@ -425,9 +432,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(_healVFX, transform.position, Quaternion.identity);
         }
 
-        _currentSoul = 0; 
-
-        Debug.Log("Healed! Health: " + _currentHealth + ", Soul: " + _currentSoul);
+        _currentSoul = 0;
+        UIManager.Instance.UpdateSoulSlider(_currentSoul, _maxSoul);
+        UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth);
+        //Debug.Log("Healed! Health: " + _currentHealth + ", Soul: " + _currentSoul);
 
         StartCoroutine(ResetHealState());
     }
