@@ -303,6 +303,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         _playerHealth -= damage;
+        Debug.LogError("Player Health: " + _playerHealth);
 
         if (_isAttacking)
         {

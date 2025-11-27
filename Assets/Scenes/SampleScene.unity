@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _range: 2
-  _damage: 1
+  _damage: 30
   _colliderDistance: 0.6
   _boxCollider: {fileID: 564698851}
   _playerLayer:
@@ -1157,7 +1157,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  raycastOffset: {x: 0.5, y: 0}
+  raycastOffset: {x: 0.6, y: 0}
   anim: {fileID: 1185634710}
 --- !u!1 &1142967155
 GameObject:
