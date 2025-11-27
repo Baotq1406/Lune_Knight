@@ -32,7 +32,9 @@ public class EnemyPatrol : MonoBehaviour
     [Header("Chase Settings")]
     [SerializeField] private float chaseSpeed = 4f; // tốc độ khi đuổi
     [SerializeField] private float detectionRange = 5f; // tầm nhìn raycast
+    [SerializeField] private float stopDistance = 1f; // khoảng cách dừng lại khi đuổi player
     [SerializeField] private LayerMask playerLayer; // layer detect player
+    [SerializeField] private Vector2 raycastOffset = new Vector2(0, 0.5f); // offset của raycast (x: ngang, y: dọc)
 
     private bool isChasing; // trạng thái đuổi theo player
     private Transform player; // transform của player khi phát hiện
@@ -75,13 +77,14 @@ public class EnemyPatrol : MonoBehaviour
     {
         // hướng tia: -1 nếu trái, 1 nếu phải
         int dir = movingLeft ? -1 : 1; 
-        Vector2 origin = enemy.position; // gốc raycast
+        
+        // Tính vị trí gốc raycast với offset
+        Vector2 origin = (Vector2)enemy.position + new Vector2(raycastOffset.x * dir, raycastOffset.y);
         Vector2 direction = new Vector2(dir, 0);// hướng raycast
 
-        // thực hiện raycast
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, detectionRange, playerLayer);
 
-        Debug.DrawRay(origin, direction * detectionRange, Color.red);
+        Debug.DrawRay(origin, direction * detectionRange, hit.collider != null ? Color.green : Color.red);
 
         // nếu phát hiện player
         if (hit.collider != null)
@@ -90,6 +93,7 @@ public class EnemyPatrol : MonoBehaviour
             player = hit.collider.transform;
         }
     }
+    
     // hàm đuổi theo player
     private void ChasePlayer()
     {
@@ -99,11 +103,20 @@ public class EnemyPatrol : MonoBehaviour
             return;
         }
 
+        float distanceToPlayer = Vector2.Distance(enemy.position, player.position);
+
         // Nếu người chơi vượt quá phạm vi → ngừng đuổi
-        if (Vector2.Distance(enemy.position, player.position) > detectionRange + 1f)
+        if (distanceToPlayer > detectionRange + 1f)
         {
             isChasing = false;
             return;
+        }
+
+        // Nếu player quá gần → dừng di chuyển nhưng vẫn giữ animation
+        if (distanceToPlayer <= stopDistance)
+        {
+            anim.SetBool(CONSTANT.IS_RUNNING, false);
+            return; // không xoay, không di chuyển
         }
 
         anim.SetBool(CONSTANT.IS_RUNNING, true);
@@ -111,8 +124,12 @@ public class EnemyPatrol : MonoBehaviour
         // xác định hướng chạy tới player
         int direction = player.position.x < enemy.position.x ? -1 : 1;
 
-        // xoay mặt
-        enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * direction, initScale.y, initScale.z);
+        // Chỉ xoay mặt nếu hướng khác với hướng hiện tại
+        float currentFacing = Mathf.Sign(enemy.localScale.x);
+        if (currentFacing != direction)
+        {
+            enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * direction, initScale.y, initScale.z);
+        }
 
         // di chuyển theo hướng player
         enemy.position += new Vector3(direction * chaseSpeed * Time.deltaTime, 0, 0);
@@ -163,6 +180,16 @@ public class EnemyPatrol : MonoBehaviour
             enemy.position.y, enemy.position.z);
     }
 
+    // Cập nhật hướng dựa trên scale hiện tại của enemy
+    public void UpdateFacingDirection()
+    {
+        if (enemy == null) return;
+        
+        // Nếu scale.x âm → đang quay trái
+        // Nếu scale.x dương → đang quay phải
+        movingLeft = enemy.localScale.x < 0;
+    }
+
     private void OnDrawGizmos()
     {
         // ve duong di chuyen va diem patrol tren editor
@@ -178,8 +205,17 @@ public class EnemyPatrol : MonoBehaviour
         if (enemy != null) 
         { 
             int dir = movingLeft ? -1 : 1;  // huong raycast
+            
+            // Tính vị trí gốc raycast với offset (giống logic trong DetectPlayer)
+            Vector3 origin = enemy.position + new Vector3(raycastOffset.x * dir, raycastOffset.y, 0);
+            Vector3 endPoint = origin + new Vector3(dir * detectionRange, 0, 0);
+            
             Gizmos.color = Color.yellow; // mau cua raycast
-            Gizmos.DrawLine(enemy.position, enemy.position + new Vector3(dir * detectionRange, 0, 0)); // ve raycast
+            Gizmos.DrawLine(origin, endPoint); // ve raycast
+            
+            // Vẽ điểm gốc để dễ thấy
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(origin, 0.1f);
         }
     }
 }

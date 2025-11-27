@@ -27,10 +27,12 @@ public class EnemyMelee : MonoBehaviour
     private Rigidbody2D _rigi;
     #endregion
 
+    #region Knockback Settings
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackForce = 3f;
     [SerializeField] private float _knockbackDuration = 0.2f;
     private bool _isKnockback = false;
+    #endregion
 
     [SerializeField] private int _enemyHealth = 100;
     private bool _isDead = false;
@@ -112,10 +114,27 @@ public class EnemyMelee : MonoBehaviour
         }
     }
 
+    // Kiểm tra xem player có đang ở phía sau enemy không
+    private bool IsPlayerBehind()
+    {
+        if (GameManager.Instance.Player == null) return false;
+
+        float playerDirection = GameManager.Instance.Player.transform.position.x - transform.position.x;
+        float enemyFacing = transform.localScale.x;
+
+        // Player ở phía sau nếu:
+        // - Enemy quay phải (scale.x > 0) và player ở bên trái (playerDirection < 0)
+        // - Enemy quay trái (scale.x < 0) và player ở bên phải (playerDirection > 0)
+        return (enemyFacing > 0 && playerDirection < 0) || (enemyFacing < 0 && playerDirection > 0);
+    }
+
     // Knockback
     private IEnumerator DoKnockback()
     {
         _isKnockback = true;
+
+        // Kiểm tra xem player có ở phía sau không trước khi knockback
+        bool wasPlayerBehind = IsPlayerBehind();
 
         float dir = transform.position.x < GameManager.Instance.Player.transform.position.x ? -1 : 1;
         float timer = 0f;
@@ -128,8 +147,36 @@ public class EnemyMelee : MonoBehaviour
         }
 
         _rigi.velocity = new Vector2(0, _rigi.velocity.y);
+
+        // CHỈ quay mặt về phía người chơi nếu bị tấn công từ phía sau
+        if (wasPlayerBehind)
+        {
+            FacePlayer();
+        }
+
         _isKnockback = false;
     }
+
+    // Quay mặt enemy về phía người chơi
+    private void FacePlayer()
+    {
+        if (GameManager.Instance.Player == null) return;
+
+        float playerDirection = GameManager.Instance.Player.transform.position.x - transform.position.x;
+        
+        // Nếu player ở bên phải (playerDirection > 0) thì scale.x dương
+        // Nếu player ở bên trái (playerDirection < 0) thì scale.x âm
+        float newScaleX = playerDirection > 0 ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x);
+        
+        transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
+        
+        // Cập nhật hướng trong EnemyPatrol để raycast bắn đúng hướng
+        if (enemyPatrol != null)
+        {
+            enemyPatrol.UpdateFacingDirection();
+        }
+    }
+
     // Enemy chet
     private IEnumerator Die()
     {
