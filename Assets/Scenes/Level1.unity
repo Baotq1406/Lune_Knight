@@ -7928,6 +7928,10 @@ MonoBehaviour:
   _player: {fileID: 366655308}
   _enemyMelee: {fileID: 0}
   _rangedEnemy: {fileID: 0}
+  _upgradePoints: 0
+  _hpUpgradeCost: 10
+  _damageUpgradeCost: 5
+  _healUpgradeCost: 5
 --- !u!4 &2131241222
 Transform:
   m_ObjectHideFlags: 0

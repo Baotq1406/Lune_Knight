@@ -14,6 +14,33 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private TMP_Text _healthText;
 
+    // Stats Panel
+    [SerializeField] public GameObject _statsPanel;
+    [SerializeField] private TMP_Text _pointText;
+    [SerializeField] private TMP_Text _hpText;
+    [SerializeField] private TMP_Text _attackText;
+    [SerializeField] private TMP_Text _healText;
+
+
+    private void Start()
+    {
+        _statsPanel.SetActive(false); // an panel thong so luc dau
+    }
+
+    private void Update()
+    {
+        // Toggle Stats Panel
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ShowStatsPanel();
+        }
+    }
+
+    public void ShowStatsPanel()
+    {
+        _statsPanel.SetActive(!_statsPanel.activeSelf);
+    }
+
     // Update Soul Slider
     public void UpdateSoulSlider(int current, int max)
     {
@@ -28,6 +55,25 @@ public class UIManager : Singleton<UIManager>
         _healthSlider.maxValue = max; // cap nhat gia tri toi da
         _healthSlider.value = current; // cap nhat gia tri hien tai
         _healthText.text = _healthSlider.value + "/" + _healthSlider.maxValue; // cap nhat text
+    }
+
+    // Update Point Text
+    public void UpdatePointText(int point)
+    {
+        _pointText.text = "Points: " + point;
+    }
+
+    public void ShowHPText(int health)
+    {
+        _hpText.text = "HP: " + health;
+    } 
+    public void ShowAttackText(int attack)
+    {
+        _attackText.text = "Atk: " + attack;
+    }
+    public void ShowHealText(int heal)
+    {
+        _healText.text = "Heal: " + heal;
     }
 
 }
