@@ -26,13 +26,15 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        _upgradePoints = PlayerPrefs.GetInt(CONSTANT.POINTS, 0);
         UIManager.Instance.UpdatePointText(_upgradePoints);
     }
 
     public void AddUpgradePoint(int amount)
     {
         _upgradePoints += amount;
+        PlayerPrefs.SetInt(CONSTANT.POINTS, _upgradePoints);
         UIManager.Instance.UpdatePointText(_upgradePoints);
-        Debug.Log("Upgrade Points: " + _upgradePoints);
+        //Debug.Log("Upgrade Points: " + _upgradePoints);
     }
 }

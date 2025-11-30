@@ -8,6 +8,7 @@ public class AxeAttack : MonoBehaviour
 
     private void Start()
     {
+        _attackDamage = PlayerPrefs.GetInt(CONSTANT.ATTACK_DAMAGE, _attackDamage);
         UIManager.Instance.ShowAttackText(_attackDamage);
     }
 
@@ -36,6 +37,7 @@ public class AxeAttack : MonoBehaviour
             return;
         GameManager.Instance.AddUpgradePoint(-1);
         _attackDamage += GameManager.Instance.DamageUpgradeCost;
+        PlayerPrefs.SetInt(CONSTANT.ATTACK_DAMAGE, _attackDamage);
         UIManager.Instance.ShowAttackText(_attackDamage);
     }
 }
