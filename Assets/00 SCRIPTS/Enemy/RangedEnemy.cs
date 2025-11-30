@@ -137,6 +137,7 @@ public class RangedEnemy : MonoBehaviour
         {
             _isDead = true;
             //Debug.LogError("Ranged Enemy Dead");
+            GameManager.Instance.AddUpgradePoint(Random.Range(1, 3));
             _anim.ResetTrigger(CONSTANT.RANGED_ATTACK); // reset trigger tan cong
             StartCoroutine(Die()); // bat dau animation chet
         }

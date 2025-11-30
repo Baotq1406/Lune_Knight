@@ -13,4 +13,26 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] RangedEnemy _rangedEnemy;
     public RangedEnemy RangedEnemy => _rangedEnemy;
+
+
+    [SerializeField] private int _upgradePoints = 0;
+    public int UpgradePoints => _upgradePoints;
+    [SerializeField] private int _hpUpgradeCost = 10;
+    public int HpUpgradeCost => _hpUpgradeCost;
+    [SerializeField] private int _damageUpgradeCost = 5;
+    public int DamageUpgradeCost => _damageUpgradeCost;
+    [SerializeField] private int _healUpgradeCost = 5;
+    public int HealUpgradeCost => _healUpgradeCost;
+
+    private void Start()
+    {
+        UIManager.Instance.UpdatePointText(_upgradePoints);
+    }
+
+    public void AddUpgradePoint(int amount)
+    {
+        _upgradePoints += amount;
+        UIManager.Instance.UpdatePointText(_upgradePoints);
+        Debug.Log("Upgrade Points: " + _upgradePoints);
+    }
 }

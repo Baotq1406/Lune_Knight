@@ -6,6 +6,11 @@ public class AxeAttack : MonoBehaviour
 {
     [SerializeField] private int _attackDamage = 25;
 
+    private void Start()
+    {
+        UIManager.Instance.ShowAttackText(_attackDamage);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(CONSTANT.ENEMY_ORC_TAG))
@@ -23,5 +28,14 @@ public class AxeAttack : MonoBehaviour
             GameManager.Instance.RangedEnemy.TakeDamage(_attackDamage);
             GameManager.Instance.Player.GainSoul(1);
         }
+    }
+
+    public void PlusDam()
+    {
+        if (GameManager.Instance.UpgradePoints <= 0)
+            return;
+        GameManager.Instance.AddUpgradePoint(-1);
+        _attackDamage += GameManager.Instance.DamageUpgradeCost;
+        UIManager.Instance.ShowAttackText(_attackDamage);
     }
 }

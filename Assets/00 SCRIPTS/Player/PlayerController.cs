@@ -48,8 +48,10 @@ public class PlayerController : MonoBehaviour
     #region === Damage / Health/ Knockback===
     [Header("Healing / Soul Settings")]
     [SerializeField] private int _maxHealth = 100;           // Máu tối đa
+    public int maxHealth => _maxHealth;               // Ham get mau toi da
     [SerializeField] private int _currentHealth;           // Máu hiện tại
     [SerializeField] private int _healAmount = 1;          // Số máu hồi mỗi lần
+    public int healAmount => _healAmount;               // Ham get so mau hoi
     [SerializeField] private int _maxSoul = 5;             // Năng lượng tối đa
     [SerializeField] private int _currentSoul = 0;         // Năng lượng hiện tại
     [SerializeField] private float _healCooldown = 0.5f;  // Cooldown hồi máu
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraShakeDuration = 0.2f;    // thoi gian shake camera khi bi thuong
     [SerializeField] private float _cameraShakeMagnitude = 0.1f;  // do manh shake camera
     [SerializeField] CameraController _cameraController; // tham chieu toi camera controller
-    [SerializeField] private bool  _isHurt = false; // trang thai bi thuong
+    [SerializeField] private bool _isHurt = false; // trang thai bi thuong
     [SerializeField] private bool _isDead = false; // trang thai chet
     public bool isDeadPlayer => _isDead; // ham get trang thai chet
     private bool _isKnockback = false; // trang thai bi knockback
@@ -92,11 +94,18 @@ public class PlayerController : MonoBehaviour
         _currentSoul = 0; // khoi tao nang luong
         UIManager.Instance.UpdateSoulSlider(_currentSoul, _maxSoul); // cap nhat UI soul
 
+        //UIManager.Instance.UpdatePointText(_upgradePoints); // cap nhat UI diem nang cap
         //_camera = FindObjectOfType<CameraController>(); // cache camera controller
+
+        UIManager.Instance.ShowHPText(_maxHealth); // hien thi text mau luc dau
+        UIManager.Instance.ShowHealText(_healAmount); // hien thi text heal luc dau
     }
 
     void Update()
     {
+        if (UIManager.Instance._statsPanel.activeSelf)
+            return; // neu dang mo panel thong so thi khong cho dieu khien nhan vat
+
         if (!_isDead)
         {
             // neu khong dang dash thi cho phep di chuyen
@@ -208,10 +217,18 @@ public class PlayerController : MonoBehaviour
         // nhan space de nhay, chi duoc nhay toi da _maxJumpCount lan
         if (Input.GetKeyDown(KeyCode.Space) && _currentJumpCount < _maxJumpCount && !_isDashing)
         {
+            // Nếu đang rơi → chỉ cho nhảy 1 lần
+            if (_rigi.velocity.y < 0)
+                _currentJumpCount = _maxJumpCount - 1; // nghĩa là chỉ còn 1 jump cuối
+            else if (_isOnGrounded)
+                _currentJumpCount = 0;  // trên đất thì reset
+                                        // nếu đang bay lên thì giữ nguyên currentJumpCount
+
             _rigi.velocity = new Vector2(_rigi.velocity.x, 0); // reset van toc Y
             _rigi.AddForce(new Vector2(0, _jumpForce)); // them luc nhay
             _isOnGrounded = false;
             _currentJumpCount++;
+            //Debug.LogError("Jump Count: " + _currentJumpCount); 
         }
 
         // dieu chinh toc do roi va nhay thap
@@ -445,6 +462,28 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(_healCooldown);
         _isHealing = false;
     }
+
+    public void PlusMaxHP()
+    {
+        if (GameManager.Instance.UpgradePoints <= 0)
+            return;
+
+        GameManager.Instance.AddUpgradePoint(-1);
+
+        _maxHealth +=GameManager.Instance.HpUpgradeCost;
+        UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth);
+        UIManager.Instance.ShowHPText(_maxHealth);
+    }
+
+    public void PlusHealAmount()
+    {
+        if (GameManager.Instance.UpgradePoints <= 0)
+            return;
+        GameManager.Instance.AddUpgradePoint(-1);
+        _healAmount += GameManager.Instance.HealUpgradeCost;
+        UIManager.Instance.ShowHealText(_healAmount);
+    }
+
 
     // enum trang thai nhan vat
     public enum PlayerState

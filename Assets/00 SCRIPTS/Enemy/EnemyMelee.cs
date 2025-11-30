@@ -115,7 +115,7 @@ public class EnemyMelee : MonoBehaviour
         if (_isDead) return;
 
         _enemyHealth -= damage;
-        Debug.LogError("Enemy heal:" + _enemyHealth);
+        Debug.LogError("Melee Enemy heal:" + _enemyHealth);
         _anim.SetTrigger(CONSTANT.MELEE_HURT);
 
         StartCoroutine(DoKnockback());
@@ -123,6 +123,7 @@ public class EnemyMelee : MonoBehaviour
         if (_enemyHealth <= 0)
         {
             _isDead = true;
+            GameManager.Instance.AddUpgradePoint(Random.Range(1, 3));
             StartCoroutine(Die());
         }
     }
