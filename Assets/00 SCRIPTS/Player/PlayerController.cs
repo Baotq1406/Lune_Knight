@@ -88,7 +88,17 @@ public class PlayerController : MonoBehaviour
         if (_axeAttack != null)
             _axeAttack.SetActive(false); // tat hitbox ri truoc khi choi
 
-        _currentHealth = _maxHealth; // khoi tao mau
+        _maxHealth = PlayerPrefs.GetInt(CONSTANT.MAX_HEALTH, _maxHealth); // lay max HP tu player prefs
+        if (PlayerPrefs.GetInt(CONSTANT.LAST_CHECKPOINT_HEALTH, _currentHealth) > 0)
+        {
+            _currentHealth = PlayerPrefs.GetInt(CONSTANT.LAST_CHECKPOINT_HEALTH, _currentHealth); // lay mau hien tai o checkpoint
+        } else
+        {
+            _currentHealth = _maxHealth; // khoi tao mau
+        }
+        _healAmount = PlayerPrefs.GetInt(CONSTANT.HEAL_AMOUNT, _healAmount); // lay luc hoi mau tu player prefs
+        //_currentHealth = _maxHealth; // khoi tao mau
+        //_currentHealth = PlayerPrefs.GetInt(CONSTANT.LAST_CHECKPOINT_HEALTH, _currentHealth); // lay mau hien tai o checkpoint
         UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth); // cap nhat UI mau
 
         _currentSoul = 0; // khoi tao nang luong
@@ -369,6 +379,8 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ResetHurtState()); // reset trang thai hurt
         StartCoroutine(InvincibilityCoroutine()); // bat invincibility tam thoi
         _cameraController?.Shake(_cameraShakeDuration, _cameraShakeMagnitude); // shake camera
+
+        PlayerPrefs.SetInt(CONSTANT.LAST_CHECKPOINT_HEALTH, _currentHealth); // luu mau hien tai o checkpoint
     }
 
     // coroutine vo hieu hoa nhan sat thuong tam thoi
@@ -463,25 +475,32 @@ public class PlayerController : MonoBehaviour
         _isHealing = false;
     }
 
+    // ham tang max HP
     public void PlusMaxHP()
     {
+        // kiem tra diem nang cap
         if (GameManager.Instance.UpgradePoints <= 0)
             return;
 
-        GameManager.Instance.AddUpgradePoint(-1);
-
-        _maxHealth +=GameManager.Instance.HpUpgradeCost;
-        UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth);
-        UIManager.Instance.ShowHPText(_maxHealth);
+        GameManager.Instance.AddUpgradePoint(-1); // tru diem nang cap
+        _maxHealth +=GameManager.Instance.HpUpgradeCost; // tang max HP
+        PlayerPrefs.SetInt(CONSTANT.MAX_HEALTH, _maxHealth); // luu max HP
+        UIManager.Instance.UpdateHealthSlider(_currentHealth, _maxHealth); // cap nhat UI mau
+        UIManager.Instance.ShowHPText(_maxHealth); // hien thi text max HP
     }
 
+    // ham tang luc hoi mau
     public void PlusHealAmount()
     {
+        // kiem tra diem nang cap
         if (GameManager.Instance.UpgradePoints <= 0)
             return;
+
+        // tru diem nang cap
         GameManager.Instance.AddUpgradePoint(-1);
-        _healAmount += GameManager.Instance.HealUpgradeCost;
-        UIManager.Instance.ShowHealText(_healAmount);
+        _healAmount += GameManager.Instance.HealUpgradeCost; // tang luc hoi mau
+        PlayerPrefs.SetInt(CONSTANT.HEAL_AMOUNT, _healAmount); // luu luc hoi mau
+        UIManager.Instance.ShowHealText(_healAmount); // hien thi text luc hoi mau
     }
 
 

@@ -19,4 +19,12 @@ public static class CONSTANT
     public static string RANGED_HURT = "rangedHurt"; // animation bi thuong
     public static string RANGED_DEATH = "rangedDeath"; // animation chet
     #endregion
+
+    #region Player Stats
+    public static string POINTS = "UpgradePoints"; // diem nang cap cua player
+    public static string MAX_HEALTH = "MaxHealth"; // mau toi da cua player
+    public static string ATTACK_DAMAGE = "AttackDamage"; // sat thuong tan cong cua player
+    public static string HEAL_AMOUNT = "HealAmount"; // luc hoi mau cua player
+    public static string LAST_CHECKPOINT_HEALTH = "LastCheckpointHealth"; // mau luc luu checkpoint
+    #endregion
 }
