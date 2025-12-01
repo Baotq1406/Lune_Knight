@@ -128,7 +128,7 @@ public class RangedEnemy : MonoBehaviour
         if (_isDead) return;
 
         _enemyHealth -= damage;
-        Debug.LogError("Ranged Health enemy:" + _enemyHealth);
+        //Debug.LogError("Ranged Health enemy:" + _enemyHealth);
         _anim.SetTrigger(CONSTANT.RANGED_HURT);
 
         StartCoroutine(DoKnockback()); // bat dau knockback

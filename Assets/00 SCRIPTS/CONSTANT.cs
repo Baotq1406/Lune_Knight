@@ -6,6 +6,7 @@ public static class CONSTANT
     public static string ENEMY_TAG = "Enemy"; // tag cua enemy
     public static string ENEMY_ORC_TAG = "Orc_Enemy"; 
     public static string ENEMY_ARCHER_TAG = "Archer_Enemy";
+    public static string ENEMY_BOSS_TAG = "Boss_Enemy";
     #endregion 
 
     #region Enemy Animator Parameters
@@ -18,6 +19,13 @@ public static class CONSTANT
     public static string RANGED_ATTACK = "rangedAttack"; // animation tan cong
     public static string RANGED_HURT = "rangedHurt"; // animation bi thuong
     public static string RANGED_DEATH = "rangedDeath"; // animation chet
+
+    //boss animations
+    public static string BOSS_MELEE_ATK = "MELEEATK"; // animation tan cong melee boss
+    public static string BOSS_MELEE_ATK_2 = "MELEEATK_2"; // animation tan cong melee 2 boss
+    public static string BOSS_RANGED_ATK = "RANGEDATK"; // animation tan cong ranged boss (trigger)
+    public static string BOSS_HURT = "HURT"; // animation bi thuong boss (trigger)
+    public static string BOSS_DEAD = "DEAD"; // animation chet boss (trigger)
     #endregion
 
     #region Player Stats

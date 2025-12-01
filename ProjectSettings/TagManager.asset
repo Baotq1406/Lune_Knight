@@ -15,6 +15,7 @@ TagManager:
   - Axe Trap
   - Floor Spike Trap
   - Swords Man Trap
+  - Boss_Enemy
   layers:
   - Default
   - TransparentFX
