@@ -29,6 +29,14 @@ public class AxeAttack : MonoBehaviour
             GameManager.Instance.RangedEnemy.TakeDamage(_attackDamage);
             GameManager.Instance.Player.GainSoul(1);
         }
+
+        if (collision.CompareTag(CONSTANT.ENEMY_BOSS_TAG))
+        {
+            Debug.LogError("AxeAttack hit BOSS");
+            // xu ly sat thuong o day
+            BossController.Instance.TakeDamage(_attackDamage, GameManager.Instance.Player.transform);
+            GameManager.Instance.Player.GainSoul(1);
+        }
     }
 
     public void PlusDam()
