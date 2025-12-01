@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FloorSpikeTrap : MonoBehaviour
 {
-	[Header("Cài ??t")]
+	[Header("Settings")]
 	[SerializeField] private int damage = 1; // L??ng máu m?t
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -17,8 +17,6 @@ public class FloorSpikeTrap : MonoBehaviour
 			// - damage: Tr? máu
 			// - transform: Truy?n v? trí c?a b?y ?? Player tính h??ng b?t ng??c l?i (Knockback)
 			player.TakeDamage(damage, transform);
-
-			Debug.Log("?ã ch?m vào chông!");
 		}
 	}
 }
