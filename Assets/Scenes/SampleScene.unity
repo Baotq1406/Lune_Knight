@@ -2292,7 +2292,7 @@ GameObject:
   - component: {fileID: 1200442121}
   - component: {fileID: 1200442122}
   - component: {fileID: 1200442123}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: roomBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
