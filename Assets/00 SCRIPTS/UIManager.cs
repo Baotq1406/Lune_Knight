@@ -21,6 +21,10 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TMP_Text _attackText;
     [SerializeField] private TMP_Text _healText;
 
+    // Boss Health UI
+    [SerializeField] private Slider _bossHealthSlider;
+    public Slider BossHealthSlider => _bossHealthSlider;
+
 
     private void Start()
     {
@@ -55,6 +59,12 @@ public class UIManager : Singleton<UIManager>
         _healthSlider.maxValue = max; // cap nhat gia tri toi da
         _healthSlider.value = current; // cap nhat gia tri hien tai
         _healthText.text = _healthSlider.value + "/" + _healthSlider.maxValue; // cap nhat text
+    }
+
+    public void UpdateBossHealthSlider(int current, int max)
+    {
+        _bossHealthSlider.maxValue = max; // cap nhat gia tri toi da
+        _bossHealthSlider.value = current; // cap nhat gia tri hien tai
     }
 
     // Update Point Text

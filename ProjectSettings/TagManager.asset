@@ -16,6 +16,7 @@ TagManager:
   - Floor Spike Trap
   - Swords Man Trap
   - Boss_Enemy
+  - Boss_Room
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Arrow
   - Axe
   - Trap
-  - 
+  - RoomBoss
   - 
   - 
   - 

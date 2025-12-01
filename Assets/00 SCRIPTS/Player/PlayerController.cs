@@ -369,6 +369,7 @@ public class PlayerController : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            _currentHealth = 0;
             _isDead = true;
             PlayerPrefs.SetInt(CONSTANT.LAST_CHECKPOINT_HEALTH, _currentHealth);
             _rigi.velocity = Vector2.zero; // dung nhan vat lai khi chet
