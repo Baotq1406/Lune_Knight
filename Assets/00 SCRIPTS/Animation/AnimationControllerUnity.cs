@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static PlayerController; // su dung PlayerState tu PlayerController
+using static BossController; // su dung BossState tu BossController
 
 public class AnimationControllerUnity : AnimationControllerBase
 {
@@ -22,6 +23,23 @@ public class AnimationControllerUnity : AnimationControllerBase
             string stateName = ((PlayerState)i).ToString(); // lay ten string cua PlayerState
 
             if (playerState == ((PlayerState)i))
+            {
+                _animator.SetBool(stateName, true);  // set true cho trang thai hien tai
+            }
+            else
+            {
+                _animator.SetBool(stateName, false); // tat tat ca cac trang thai khac
+            }
+        }
+    }
+
+    public override void UpdateAnimationBoss(BossState bossState)
+    {
+        // duyet tat ca cac trang thai BossState
+        for (int i = 0; i <= (int)BossState.MELEEATK_2; i++)
+        {
+            string stateName = ((BossState)i).ToString(); // lay ten string cua BossState
+            if (bossState == ((BossState)i))
             {
                 _animator.SetBool(stateName, true);  // set true cho trang thai hien tai
             }

@@ -26,4 +26,16 @@ public class EventReceiver : MonoBehaviour
         GameManager.Instance.RangedEnemy.ShootArrow();
     }
     #endregion
+
+    #region Boss Attack Events
+    public void TriggerBossMeleeAttack()
+    {
+        BossController.Instance.DealDamageToPlayer();
+    }
+
+    public void TriggerBossRangedAttack()
+    {
+        BossController.Instance.ShootLaser();
+    }
+    #endregion
 }
