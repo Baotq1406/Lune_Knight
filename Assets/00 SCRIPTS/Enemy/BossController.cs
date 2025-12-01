@@ -64,10 +64,6 @@ public class BossController : Singleton<BossController>
     [SerializeField] private float _deathDuration = 2f; // thoi gian animation chet
     #endregion
 
-    [SerializeField] private int _healthBoss = 1000;
-    private bool _isHurt = false;
-    [SerializeField] private bool _isDead = false;
-
     #region State
     [Header("State")]
     [SerializeField] private BossState _currentBossState = BossState.IDLE;
@@ -83,9 +79,17 @@ public class BossController : Singleton<BossController>
     private bool _playerDetected = false; // co danh dau da phat hien player
     #endregion
 
+
+    [SerializeField] private int _healthMaxBoss = 1000;
+    [SerializeField] private int _currentHealthBoss;
+    private bool _isHurt = false;
+    [SerializeField] private bool _isDead = false;
+
     void Start()
     {
         _rigi = this.GetComponent<Rigidbody2D>();
+        _currentHealthBoss = _healthMaxBoss;
+        UIManager.Instance.UpdateBossHealthSlider(_currentHealthBoss, _healthMaxBoss);
     }
 
     void Update()
@@ -514,12 +518,15 @@ public class BossController : Singleton<BossController>
     {
         if (_isDead) return; // Khong nhan dam neu da chet
 
-        _healthBoss -= damage;
-        Debug.Log("Boss Health: " + _healthBoss);
+        _currentHealthBoss -= damage;
+        UIManager.Instance.UpdateBossHealthSlider(_currentHealthBoss, _healthMaxBoss);
+        Debug.Log("Boss Health: " + _currentHealthBoss);
 
-        if (_healthBoss <= 0)
+
+        if (_currentHealthBoss <= 0)
         {
-            _healthBoss = 0; // Dam bao health khong am
+            _currentHealthBoss = 0; // Dam bao health khong am
+            UIManager.Instance.BossHealthSlider.gameObject.SetActive(false);
             StartCoroutine(DeathCoroutine());
         }
         else
