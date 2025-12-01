@@ -41,6 +41,7 @@ public class GuideNPC : MonoBehaviour
         // So sánh Tag của đối tượng va chạm là "Player"
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("Player ENTERED range: Prompt should be ON");
             playerInRange = true;
             // Hiển thị Prompt
             if (interactPrompt != null) interactPrompt.SetActive(true);
