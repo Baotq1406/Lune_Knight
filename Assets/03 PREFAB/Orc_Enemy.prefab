@@ -135,7 +135,7 @@ MonoBehaviour:
   enemyPatrol: {fileID: 8699843001197372446}
   _knockbackForce: 3
   _knockbackDuration: 0.15
-  _enemyHealth: 100
+  _enemyHealth: 150
 --- !u!82 &751863915937467313
 AudioSource:
   m_ObjectHideFlags: 0

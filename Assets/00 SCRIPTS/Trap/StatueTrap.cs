@@ -11,7 +11,7 @@ public class StatueTrap : MonoBehaviour
     [SerializeField] private float rangeRight = 1.0f;
 
     [Header("Cấu hình Sát thương")]
-    [SerializeField] private int damage = 20;
+    [SerializeField] private int damage = 15;
     [SerializeField] private float attackDelay = 0.4f; // Canh cho khớp lúc kiếm chạm đất
     [SerializeField] private float cooldown = 2.0f;
 
@@ -33,12 +33,12 @@ public class StatueTrap : MonoBehaviour
     {
         if (playerTransform == null || isAttacking) return;
 
-        // 1. Tính toán vị trí
+        // Tính toán vị trí
         float distanceX = playerTransform.position.x - transform.position.x;
         float distanceY = Mathf.Abs(playerTransform.position.y - transform.position.y);
         float absDistX = Mathf.Abs(distanceX);
 
-        // 2. Kiểm tra xem có đang ở trong vùng kích hoạt không
+        // Kiểm tra xem có đang ở trong vùng kích hoạt không
         bool inRange = false;
 
         // Chỉ chém nếu cùng độ cao (lệch không quá 1.5m)
@@ -54,7 +54,7 @@ public class StatueTrap : MonoBehaviour
             }
         }
 
-        // 3. Xử lý Logic Chém
+        // Xử lý Logic Chém
         if (inRange)
         {
             // Nếu chưa chém lần nào trong đợt này thì mới chém
@@ -69,7 +69,7 @@ public class StatueTrap : MonoBehaviour
         }
         else
         {
-            // 4. Logic Reset (Vùng đệm)
+            // Logic Reset (Vùng đệm)
             // Chỉ khi Player đi ra xa hơn tầm đánh một chút (buffer 0.5m) thì mới reset
             // Để tránh bị lỗi chém lặp lại khi đứng ngay mép vạch
             float currentLimit = (distanceX < 0) ? rangeLeft : rangeRight;

@@ -166,10 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d179ee273b368418c16ecd1f372d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 20
   activeDuration: 2
-  audioSource: {fileID: 3104208489060408274}
-  chopSound: {fileID: 8300000, guid: 3d6bdbf18d18a9a4b85449adf8ff9715, type: 3}
 --- !u!82 &3104208489060408274
 AudioSource:
   m_ObjectHideFlags: 0

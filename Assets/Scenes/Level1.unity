@@ -3000,7 +3000,7 @@ Transform:
   m_GameObject: {fileID: 859530180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.5, y: 0.56, z: -5}
+  m_LocalPosition: {x: 0.08, y: -0.01, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3406,7 +3406,7 @@ MonoBehaviour:
   _axeAttack: {fileID: 374913260}
   _maxHealth: 100
   _currentHealth: 0
-  _healAmount: 20
+  _healAmount: 25
   _maxSoul: 5
   _currentSoul: 0
   _healCooldown: 0.5
@@ -11853,67 +11853,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2113232475}
   m_SourcePrefab: {fileID: 100100000, guid: 9f785b246fe7f2049b9137e9277e2ffc, type: 3}
---- !u!1001 &1117821199
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.479764
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5585134
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.057476442
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1736678902498243793, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919468618788558414, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: activeDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8462739125392203293, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
-      propertyPath: m_Name
-      value: Axe_Trap_System
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
 --- !u!1 &1117888410
 GameObject:
   m_ObjectHideFlags: 0
@@ -16351,6 +16290,5 @@ SceneRoots:
   - {fileID: 445420487}
   - {fileID: 1481272120}
   - {fileID: 293856897}
-  - {fileID: 1117821199}
   - {fileID: 3111518}
   - {fileID: 1353019819}

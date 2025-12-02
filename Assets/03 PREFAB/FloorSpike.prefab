@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddf1fe4c4ce8914cb1a0c3111d0395d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 100
   audioSource: {fileID: -4545222069578350658}
   activateSound: {fileID: 8300000, guid: 2f58ef53a29149a449dae3b7edabfd87, type: 3}
 --- !u!82 &-4545222069578350658

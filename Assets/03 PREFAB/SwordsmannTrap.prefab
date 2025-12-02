@@ -167,6 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeLeft: 2
   rangeRight: 2
-  damage: 20
+  damage: 15
   attackDelay: 0.4
   cooldown: 2

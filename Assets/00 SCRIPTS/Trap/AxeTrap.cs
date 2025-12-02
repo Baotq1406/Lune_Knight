@@ -4,7 +4,7 @@ using System.Collections;
 public class AxeTrap : MonoBehaviour
 {
     [Header("Cài đặt Rìu")]
-    [SerializeField] private int damage = 1;
+    [SerializeField] private int damage = 20;
     [SerializeField] private float activeDuration = 2.0f; // Rìu lắc lư trong bao lâu thì dừng
 
     private Animator anim;
@@ -28,13 +28,13 @@ public class AxeTrap : MonoBehaviour
     {
         isActive = true;
 
-        // 1. Kích hoạt: Bắt đầu lắc lư
+        // Kích hoạt: Bắt đầu lắc lư
         if (anim != null) anim.SetTrigger("Activate");
 
-        // 2. Chờ: Để rìu lắc lư một lúc (VD: 2 giây)
+        // Chờ: Để rìu lắc lư một lúc (VD: 2 giây)
         yield return new WaitForSeconds(activeDuration);
 
-        // 3. Reset: Bắt buộc dừng lại và quay về Idle
+        // Reset: Bắt buộc dừng lại và quay về Idle
         if (anim != null) anim.SetTrigger("Reset");
 
         isActive = false; // Cho phép kích hoạt lại lần sau

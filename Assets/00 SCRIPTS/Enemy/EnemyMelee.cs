@@ -15,7 +15,7 @@ public class EnemyMelee : MonoBehaviour
     [Header("Attack Settings")]
     [SerializeField] private float _attackCooldown = 1.5f; // thoi gian cooldown giua cac dot tan cong (thay đổi từ 0 sang 1.5f)
     [SerializeField] private float _range = 2f; // khoang cach tan cong
-    [SerializeField] private int _damage = 10; // luong sat thuong
+    [SerializeField] private int _damage = 30; // luong sat thuong
     //private bool _isAttacking = false; // trang thai dang attack
     #endregion
 
@@ -41,7 +41,7 @@ public class EnemyMelee : MonoBehaviour
     private bool _isKnockback = false;
     #endregion
 
-    [SerializeField] private int _enemyHealth = 100;
+    [SerializeField] private int _enemyHealth = 150;
     private bool _isDead = false;
 
     private void Awake()

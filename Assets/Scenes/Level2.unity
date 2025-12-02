@@ -1430,11 +1430,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4893155905736039508, guid: 3fd21f2109d9e27449ce8f492b539120, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.05
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 4893155905736039508, guid: 3fd21f2109d9e27449ce8f492b539120, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.96
+      value: -4.85
       objectReference: {fileID: 0}
     - target: {fileID: 4893155905736039508, guid: 3fd21f2109d9e27449ce8f492b539120, type: 3}
       propertyPath: m_LocalPosition.z
@@ -72082,6 +72082,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7919468618788558414, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8462739125392203293, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
       propertyPath: m_Name
       value: Axe_Trap_System_2
@@ -93867,6 +93871,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.1810222
       objectReference: {fileID: 0}
+    - target: {fileID: 7919468618788558414, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8462739125392203293, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
       propertyPath: m_Name
       value: Axe_Trap_System_1
@@ -96839,7 +96847,7 @@ MonoBehaviour:
   _axeAttack: {fileID: 1040310730}
   _maxHealth: 100
   _currentHealth: 0
-  _healAmount: 20
+  _healAmount: 25
   _maxSoul: 5
   _currentSoul: 0
   _healCooldown: 0.5
@@ -97484,6 +97492,10 @@ PrefabInstance:
     - target: {fileID: 6197196137109200672, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919468618788558414, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8462739125392203293, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
       propertyPath: m_Name
@@ -100938,6 +100950,10 @@ PrefabInstance:
     - target: {fileID: 6197196137109200672, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919468618788558414, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8462739125392203293, guid: 2c2f5e8838e4d6e4dafe4cd49dd49512, type: 3}
       propertyPath: m_Name

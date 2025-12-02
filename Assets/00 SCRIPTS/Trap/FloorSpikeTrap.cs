@@ -3,7 +3,7 @@
 public class FloorSpikeTrap : MonoBehaviour
 {
 	[Header("Settings")]
-	[SerializeField] private int damage = 1; // L??ng máu m?t
+	[SerializeField] private int damage = 100; 
 
     [Header("Âm thanh")] 
     [SerializeField] private AudioSource audioSource;
@@ -11,7 +11,6 @@ public class FloorSpikeTrap : MonoBehaviour
 
     private void Start()
     {
-        // Khởi tạo/Tìm kiếm AudioSource
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
@@ -20,10 +19,9 @@ public class FloorSpikeTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		// 1. Tìm Player (tìm ? c? cha ?? ch?c ch?n b?t ???c)
+		// Tìm Player 
 		PlayerController player = collision.GetComponentInParent<PlayerController>();
 
-		// 2. N?u ?úng là Player
 		if (player != null)
 		{
             if (audioSource != null && activateSound != null)
@@ -31,9 +29,6 @@ public class FloorSpikeTrap : MonoBehaviour
                 audioSource.PlayOneShot(activateSound);
             }
 
-            // 3. G?i hàm TakeDamage có s?n c?a Player
-            // - damage: Tr? máu
-            // - transform: Truy?n v? trí c?a b?y ?? Player tính h??ng b?t ng??c l?i (Knockback)
             player.TakeDamage(damage, transform);
 		}
 	}

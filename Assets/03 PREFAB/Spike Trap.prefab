@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d44ec4dc1b04a4190c869e53ec34d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   spikeUpDelay: 0.4
   resetTime: 2
   audioSource: {fileID: -4870757606543643026}

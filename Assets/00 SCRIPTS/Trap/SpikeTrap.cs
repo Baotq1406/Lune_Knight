@@ -4,8 +4,8 @@ using System.Collections;
 public class SpikeTrap : MonoBehaviour
 {
     [Header("Cấu hình Bẫy Chông")]
-    [SerializeField] private int damage = 5;           // Sát thương
-    [SerializeField] private float spikeUpDelay = 0.4f;// Thời gian chờ chông đâm lên (Canh theo animation)
+    [SerializeField] private int damage = 10;           
+    [SerializeField] private float spikeUpDelay = 0.4f;// Thời gian chờ chông đâm lên
     [SerializeField] private float resetTime = 2.0f;   // Thời gian chông giữ trạng thái nhọn trước khi thụt xuống
 
     [Header("Âm thanh")] 
@@ -41,7 +41,6 @@ public class SpikeTrap : MonoBehaviour
     {
         isTriggered = true;
 
-        // --- BƯỚC 1: GIỮ CHÂN PLAYER (Cho giống Bear Trap) ---
         // Tắt script để player không đi được nữa
         player.enabled = false;
 
@@ -49,22 +48,20 @@ public class SpikeTrap : MonoBehaviour
         if (rb != null)
         {
             rb.velocity = Vector2.zero;
-            // Với bẫy chông, ta KHÔNG NÊN kéo player vào giữa (dòng transform.position)
-            // vì bẫy chông thường to, dẫm mép cũng bị đâm.
         }
 
-        // --- BƯỚC 2: CHÔNG ĐÂM LÊN ---
-        if (anim != null) anim.SetTrigger("Activate"); // Gai mọc lên
+        // chông đâm lên
+        if (anim != null) anim.SetTrigger("Activate"); 
 
         if (audioSource != null && spikeUpSound != null)
         {
             audioSource.PlayOneShot(spikeUpSound);
         }
 
-        // --- BƯỚC 3: CHỜ CHẠM VÀO NGƯỜI ---
+        // chờ chạm vào người
         yield return new WaitForSeconds(spikeUpDelay);
 
-        // --- BƯỚC 4: GÂY SÁT THƯƠNG ---
+        // gây xác thương
         if (player != null)
         {
             // Bật lại não cho Player để xử lý Knockback
@@ -76,10 +73,10 @@ public class SpikeTrap : MonoBehaviour
             Debug.Log("Player đã bị chông đâm!");
         }
 
-        // --- BƯỚC 5: GIỮ GAI Ở TRÊN CAO ---
+        // giữ gai ở trên cao
         yield return new WaitForSeconds(resetTime);
 
-        // --- BƯỚC 6: THỤT XUỐNG (RESET) ---
+        // reset
         if (anim != null) anim.SetTrigger("Reset"); // Gai thụt xuống
         isTriggered = false;
     }
