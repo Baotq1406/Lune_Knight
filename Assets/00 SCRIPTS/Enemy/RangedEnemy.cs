@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class RangedEnemy : MonoBehaviour
 {
+    #region Audio Settings
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource _audioSource; // Component AudioSource
+    [SerializeField] private AudioClip _attackSound;   // File âm thanh tấn công (clip)
+    [SerializeField] private AudioClip _hurtSound;     // File âm thanh bị thương (clip)
+    #endregion
+
     #region Attack Parameters
     [Header("Attack Parameters")]
     [SerializeField] private float _attackCooldown; // thoi gian cho giua cac lan tan cong
@@ -42,6 +49,9 @@ public class RangedEnemy : MonoBehaviour
     private void Awake()
     {
         _rigi = GetComponent<Rigidbody2D>(); // lay component rigidbody
+
+        if (_audioSource == null)
+            _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -109,9 +119,20 @@ public class RangedEnemy : MonoBehaviour
             new Vector3(boxCollider.bounds.size.x * _range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
 
+    // Phát âm thanh tấn công
+    private void PlayAttackSound()
+    {
+        if (_audioSource != null && _attackSound != null)
+        {
+            _audioSource.PlayOneShot(_attackSound);
+        }
+    }
+
     // ham duoc goi boi animation event de ban mui ten
     public void ShootArrow()
     {
+        PlayAttackSound();
+
         if (_arrowPrefab == null || _firePoint == null) return;
 
         // lay doi tuong tu object pooling
@@ -129,6 +150,11 @@ public class RangedEnemy : MonoBehaviour
 
         _enemyHealth -= damage;
         //Debug.LogError("Ranged Health enemy:" + _enemyHealth);
+        // PHÁT ÂM THANH BỊ THƯƠNG NGAY KHI NHẬN SAT THƯƠNG
+        if (_audioSource != null && _hurtSound != null)
+        {
+            _audioSource.PlayOneShot(_hurtSound);
+        }
         _anim.SetTrigger(CONSTANT.RANGED_HURT);
 
         StartCoroutine(DoKnockback()); // bat dau knockback

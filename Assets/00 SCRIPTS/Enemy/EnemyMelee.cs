@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EnemyMelee : MonoBehaviour
 {
+    #region Audio Settings
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource _audioSource; // Component AudioSource
+    [SerializeField] private AudioClip _attackSound;   // File âm thanh tấn công (clip)
+    [SerializeField] private AudioClip _hurtSound;
+    #endregion
+
     #region Attack Parameters
     [Header("Attack Settings")]
     [SerializeField] private float _attackCooldown = 1.5f; // thoi gian cooldown giua cac dot tan cong (thay đổi từ 0 sang 1.5f)
@@ -40,6 +47,9 @@ public class EnemyMelee : MonoBehaviour
     private void Awake()
     {
         _rigi = GetComponent<Rigidbody2D>();
+
+        if (_audioSource == null)
+            _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -100,9 +110,19 @@ public class EnemyMelee : MonoBehaviour
             new Vector3(_boxCollider.bounds.size.x * _range, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z));
     }
 
+    private void PlayAttackSound()
+    {
+        if (_audioSource != null && _attackSound != null)
+        {
+            _audioSource.PlayOneShot(_attackSound);
+        }
+    }
+
     // Giam mau player
     public void DamagePlayer()
     {
+        PlayAttackSound();
+
         if (PlayerInSight())
         {
             GameManager.Instance.Player.TakeDamage(_damage, this.transform);
@@ -110,21 +130,32 @@ public class EnemyMelee : MonoBehaviour
     }
 
     // Nhận sát thương
+    // Nhận sát thương
     public void TakeDamage(int damage)
     {
         if (_isDead) return;
 
         _enemyHealth -= damage;
         //Debug.LogError("Melee Enemy heal:" + _enemyHealth);
-        _anim.SetTrigger(CONSTANT.MELEE_HURT);
 
-        StartCoroutine(DoKnockback());
+        // BƯỚC 1: PHÁT ÂM THANH NGAY KHI NHẬN SAT THƯƠNG
+        if (_audioSource != null && _hurtSound != null)
+        {
+            _audioSource.PlayOneShot(_hurtSound);
+        }
 
+        // BƯỚC 2: QUYẾT ĐỊNH TRẠNG THÁI (CHẾT hay BỊ THƯƠNG)
         if (_enemyHealth <= 0)
         {
             _isDead = true;
             GameManager.Instance.AddUpgradePoint(Random.Range(1, 3));
-            StartCoroutine(Die());
+            StartCoroutine(Die()); // Xử lý chết
+        }
+        else
+        {
+            // Chỉ Hurt và Knockback nếu chưa chết
+            _anim.SetTrigger(CONSTANT.MELEE_HURT);
+            StartCoroutine(DoKnockback());
         }
     }
 

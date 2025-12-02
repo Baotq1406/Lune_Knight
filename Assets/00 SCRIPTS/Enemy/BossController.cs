@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class BossController : Singleton<BossController>
 {
+    #region Audio Settings
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource _audioSource; // Component AudioSource
+    [SerializeField] private AudioClip _meleeAttackSound; // Âm thanh Melee Attack 1
+    [SerializeField] private AudioClip _meleeAttackSound_2; // Âm thanh Melee Attack 2
+    [SerializeField] private AudioClip _rangedAttackCastSound; // Âm thanh Laser Cast (chuẩn bị)
+    [SerializeField] private AudioClip _hurtSound; // Âm thanh Boss bị thương
+    [SerializeField] private AudioClip _deathSound; // Âm thanh Boss chết
+    #endregion
+
     #region Movement Settings
     [Header("Movement Settings")]
     [SerializeField] private float _moveSpeed = 3.0f;
@@ -90,6 +100,8 @@ public class BossController : Singleton<BossController>
         _rigi = this.GetComponent<Rigidbody2D>();
         _currentHealthBoss = _healthMaxBoss;
         UIManager.Instance.UpdateBossHealthSlider(_currentHealthBoss, _healthMaxBoss);
+        if (_audioSource == null)
+            _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -272,7 +284,9 @@ public class BossController : Singleton<BossController>
         {
             _animator.SetTrigger(CONSTANT.BOSS_MELEE_ATK);
         }
-        
+
+        PlaySound(_meleeAttackSound); // Sử dụng âm thanh Melee Attack 1
+
         // CHO animation choi het (quan trọng!)
         float elapsed = 0f;
         while (elapsed < _attackDuration)
@@ -322,7 +336,9 @@ public class BossController : Singleton<BossController>
         {
             _animator.SetTrigger(CONSTANT.BOSS_MELEE_ATK_2);
         }
-        
+
+        PlaySound(_meleeAttackSound_2); // Sử dụng âm thanh Melee Attack 2
+
         // CHO animation choi het (quan trọng!)
         float elapsed = 0f;
         while (elapsed < _attackDuration_2)
@@ -374,6 +390,8 @@ public class BossController : Singleton<BossController>
             _animator.SetTrigger(CONSTANT.BOSS_RANGED_ATK);
         }
 
+        PlaySound(_rangedAttackCastSound);
+
         // CHO animation choi het
         float elapsed = 0f;
         while (elapsed < _rangedAttackDuration)
@@ -416,6 +434,8 @@ public class BossController : Singleton<BossController>
     {
         if (_laserPrefab == null || _laserFirePoint == null)
             return;
+
+        PlaySound(_rangedAttackCastSound);
 
         // Khoi tao laser
         //GameObject laser = Instantiate(_laserPrefab, _laserFirePoint.position, _laserFirePoint.rotation);
@@ -522,6 +542,7 @@ public class BossController : Singleton<BossController>
         UIManager.Instance.UpdateBossHealthSlider(_currentHealthBoss, _healthMaxBoss);
         Debug.Log("Boss Health: " + _currentHealthBoss);
 
+        PlaySound(_hurtSound);
 
         if (_currentHealthBoss <= 0)
         {
@@ -585,6 +606,8 @@ public class BossController : Singleton<BossController>
     {
         _isDead = true;
         _currentBossState = BossState.DEAD;
+
+        PlaySound(_deathSound);
 
         // Set Bool animation chet
         if (_animator != null)
@@ -664,6 +687,14 @@ public class BossController : Singleton<BossController>
         Vector3 rangedBoxCenter = _boxCollider.bounds.center + (Vector3)(facingDir * _rangedAttackRange * _rangedAttackColliderDistance);
         Vector3 rangedBoxSize = new Vector3(_boxCollider.bounds.size.x * _rangedAttackRange, _boxCollider.bounds.size.y, _boxCollider.bounds.size.z);
         Gizmos.DrawWireCube(rangedBoxCenter, rangedBoxSize);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (_audioSource != null && clip != null)
+        {
+            _audioSource.PlayOneShot(clip);
+        }
     }
 
     public enum BossState
