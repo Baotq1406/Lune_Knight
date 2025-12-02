@@ -5,6 +5,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region === Audio Settings ===
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource _audioSource; // Tham chieu den AudioSource
+    [SerializeField] private AudioClip _hurtSound; // AudioClip am thanh bi thuong
+    [SerializeField] private AudioClip _attackSound; // AudioClip am thanh tan cong
+    [SerializeField] private AudioClip _jumpSound; // AudioClip am thanh nhay (Tùy chọn)
+    [SerializeField] private AudioClip _dashSound; // AudioClip am thanh dash (Tùy chọn)
+    #endregion
+    //[SerializeField] private AudioSource _audioSource; // Tham chieu den AudioSource
+    //[SerializeField] private AudioClip _hurtSound; // AudioClip am thanh bi thuong
+    //[SerializeField] private AudioClip _attackSound; // AudioClip am thanh tan cong
     #region === References ===
     [Header("References")]
     [SerializeField] private AnimationControllerBase _anim;
@@ -240,6 +251,10 @@ public class PlayerController : MonoBehaviour
             _isOnGrounded = false;
             _currentJumpCount++;
             //Debug.LogError("Jump Count: " + _currentJumpCount); 
+
+            // PHÁT ÂM THANH NHẢY
+            if (_audioSource != null && _jumpSound != null)
+                _audioSource.PlayOneShot(_jumpSound);
         }
 
         // dieu chinh toc do roi va nhay thap
@@ -274,6 +289,10 @@ public class PlayerController : MonoBehaviour
         // bat trail khi dash
         if (_dashTrail != null)
             _dashTrail.emitting = true;
+
+        // phat am thanh
+        if (_audioSource != null && _dashSound != null)
+            _audioSource.PlayOneShot(_dashSound);
 
         float dashDirection = transform.localScale.x > 0 ? 1 : -1;
         _rigi.gravityScale = 0; // tat gravity khi dash
@@ -319,6 +338,9 @@ public class PlayerController : MonoBehaviour
         _isAttacking = true;
         _attackCooldownTimer = _attackCooldown; // bat dau cooldown
         _rigi.velocity = Vector2.zero; // dung nhan vat lai khi tan cong
+        // Phát âm thanh tấn công
+        if (_audioSource != null && _attackSound != null)
+            _audioSource.PlayOneShot(_attackSound);
         yield return new WaitForSeconds(_attackDuration);
         // ket thuc tan cong
         CancelAttack();
@@ -376,6 +398,9 @@ public class PlayerController : MonoBehaviour
             CancelAttack(); // tat hitbox khi chet
             return;
         }
+
+        if (_audioSource != null && _hurtSound != null)
+            _audioSource.PlayOneShot(_hurtSound);
 
         _isHurt = true;
         StartCoroutine(DoKnockback(enemyPos)); // xu ly knockback
