@@ -119,6 +119,8 @@ public class PlayerController : MonoBehaviour
         //UIManager.Instance.UpdatePointText(_upgradePoints); // cap nhat UI diem nang cap
         //_camera = FindObjectOfType<CameraController>(); // cache camera controller
 
+        int attackDamage = PlayerPrefs.GetInt(CONSTANT.ATTACK_DAMAGE, 25);
+        UIManager.Instance.ShowAttackText(attackDamage); // hien thi text sat thuong luc dau
         UIManager.Instance.ShowHPText(_maxHealth); // hien thi text mau luc dau
         UIManager.Instance.ShowHealText(_healAmount); // hien thi text heal luc dau
     }
@@ -396,6 +398,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt(CONSTANT.LAST_CHECKPOINT_HEALTH, _currentHealth);
             _rigi.velocity = Vector2.zero; // dung nhan vat lai khi chet
             CancelAttack(); // tat hitbox khi chet
+            SceneController.Instance.GameOver(); // goi game over
             return;
         }
 
