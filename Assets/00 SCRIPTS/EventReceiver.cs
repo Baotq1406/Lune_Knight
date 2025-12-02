@@ -18,12 +18,30 @@ public class EventReceiver : MonoBehaviour
     #region Enemy Attack Events
     public void TriggerMeleeAttack()
     {
-        GameManager.Instance.EnemyMelee.DamagePlayer();
+        // T? ??ng l?y EnemyMelee t? cùng GameObject ho?c parent
+        EnemyMelee enemyMelee = GetComponentInParent<EnemyMelee>();
+        if (enemyMelee != null)
+        {
+            enemyMelee.DamagePlayer();
+        }
+        else
+        {
+            Debug.LogWarning("EnemyMelee không tìm th?y trên GameObject: " + gameObject.name);
+        }
     }
 
     public void TriggerRangedAttack()
     {
-        GameManager.Instance.RangedEnemy.ShootArrow();
+        // T? ??ng l?y RangedEnemy t? cùng GameObject ho?c parent
+        RangedEnemy rangedEnemy = GetComponentInParent<RangedEnemy>();
+        if (rangedEnemy != null)
+        {
+            rangedEnemy.ShootArrow();
+        }
+        else
+        {
+            Debug.LogWarning("RangedEnemy không tìm th?y trên GameObject: " + gameObject.name);
+        }
     }
     #endregion
 

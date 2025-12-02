@@ -8,12 +8,21 @@ public class SpikeTrap : MonoBehaviour
     [SerializeField] private float spikeUpDelay = 0.4f;// Thời gian chờ chông đâm lên (Canh theo animation)
     [SerializeField] private float resetTime = 2.0f;   // Thời gian chông giữ trạng thái nhọn trước khi thụt xuống
 
+    [Header("Âm thanh")] 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip spikeUpSound;   
+
     private Animator anim;
     private bool isTriggered = false;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +55,11 @@ public class SpikeTrap : MonoBehaviour
 
         // --- BƯỚC 2: CHÔNG ĐÂM LÊN ---
         if (anim != null) anim.SetTrigger("Activate"); // Gai mọc lên
+
+        if (audioSource != null && spikeUpSound != null)
+        {
+            audioSource.PlayOneShot(spikeUpSound);
+        }
 
         // --- BƯỚC 3: CHỜ CHẠM VÀO NGƯỜI ---
         yield return new WaitForSeconds(spikeUpDelay);

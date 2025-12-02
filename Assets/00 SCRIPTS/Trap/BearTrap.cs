@@ -8,6 +8,10 @@ public class BearTrap : MonoBehaviour
     [SerializeField] private float clampDelay = 0.6f; // Thời gian chờ Animation đóng (Frame va chạm / Sample Rate)
     [SerializeField] private float resetTime = 2.0f;  // Thời gian bẫy giữ trạng thái đóng trước khi mở lại
 
+    [Header("Âm thanh")] 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clampSound;    // Âm thanh bẫy đóng/kẹp
+
     // Các biến nội bộ
     private Animator anim;
     private bool isTriggered = false;
@@ -15,6 +19,12 @@ public class BearTrap : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+
+        // Tìm AudioSource nếu chưa được gán trong Inspector
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +63,11 @@ public class BearTrap : MonoBehaviour
 
         // --- BƯỚC 2: CHẠY ANIMATION ---
         if (anim != null) anim.SetTrigger("Activate");
+
+        if (audioSource != null && clampSound != null)
+        {
+            audioSource.PlayOneShot(clampSound);
+        }
 
         // --- BƯỚC 3: CHỜ KẸP ---
         // Đợi animation chạy đến frame đóng nắp (VD: 0.6 giây)

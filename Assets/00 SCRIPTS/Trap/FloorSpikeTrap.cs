@@ -1,22 +1,40 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class FloorSpikeTrap : MonoBehaviour
 {
 	[Header("Settings")]
-	[SerializeField] private int damage = 1; // L??ng m·u m?t
+	[SerializeField] private int damage = 1; // L??ng m√°u m?t
 
-	private void OnTriggerEnter2D(Collider2D collision)
+    [Header("√Çm thanh")] 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip activateSound;
+
+    private void Start()
+    {
+        // Kh·ªüi t·∫°o/T√¨m ki·∫øm AudioSource
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
-		// 1. TÏm Player (tÏm ? c? cha ?? ch?c ch?n b?t ???c)
+		// 1. T√¨m Player (t√¨m ? c? cha ?? ch?c ch?n b?t ???c)
 		PlayerController player = collision.GetComponentInParent<PlayerController>();
 
-		// 2. N?u ?˙ng l‡ Player
+		// 2. N?u ?√∫ng l√† Player
 		if (player != null)
 		{
-			// 3. G?i h‡m TakeDamage cÛ s?n c?a Player
-			// - damage: Tr? m·u
-			// - transform: Truy?n v? trÌ c?a b?y ?? Player tÌnh h??ng b?t ng??c l?i (Knockback)
-			player.TakeDamage(damage, transform);
+            if (audioSource != null && activateSound != null)
+            {
+                audioSource.PlayOneShot(activateSound);
+            }
+
+            // 3. G?i h√†m TakeDamage c√≥ s?n c?a Player
+            // - damage: Tr? m√°u
+            // - transform: Truy?n v? tr√≠ c?a b?y ?? Player t√≠nh h??ng b?t ng??c l?i (Knockback)
+            player.TakeDamage(damage, transform);
 		}
 	}
 }
