@@ -1652,7 +1652,7 @@ MonoBehaviour:
   guideButton: {fileID: 594929955}
   exitButton: {fileID: 1870863188}
   guideCloseButton: {fileID: 1708782154}
-  playSceneName: SampleScene
+  playSceneName: Level1
   guidePanelCanvasGroup: {fileID: 0}
   fadeDuration: 0.2
 --- !u!114 &1870863188 stripped

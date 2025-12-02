@@ -892,7 +892,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8073385, y: 0.70297337}
+  m_Offset: {x: 1.4169524, y: 0.08835387}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -903,7 +903,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.677174, y: 8.468445}
+  m_Size: {x: 5.4579463, y: 7.239206}
   m_EdgeRadius: 0
 --- !u!95 &445420485
 Animator:
@@ -1253,81 +1253,6 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -100}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0, y: 1}
---- !u!1 &608666348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 608666349}
-  - component: {fileID: 608666351}
-  - component: {fileID: 608666350}
-  m_Layer: 0
-  m_Name: DialogueBackground
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &608666349
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608666348}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1033872691}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &608666350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608666348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1225c87ff1226f64b8069321287972f8, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &608666351
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608666348}
-  m_CullTransparentMesh: 1
 --- !u!1 &627600115
 GameObject:
   m_ObjectHideFlags: 0
@@ -10601,7 +10526,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 608666349}
   - {fileID: 1512773865}
   - {fileID: 1003766455}
   m_Father: {fileID: 293856897}
@@ -12084,7 +12008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862f2d256762e5346b71fbef2d5b32b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBackground: {fileID: 608666348}
+  dialogueBackground: {fileID: 0}
   dialoguePanel: {fileID: 1512773864}
   dialogueText: {fileID: 1402549067}
 --- !u!4 &1481272120
@@ -12137,8 +12061,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.9470215, y: -5.1572876}
-  m_SizeDelta: {x: -226.9217, y: -142.9312}
+  m_AnchoredPosition: {x: 14, y: -64}
+  m_SizeDelta: {x: -294.4962, y: -278.0804}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1512773866
 MonoBehaviour:
@@ -14706,19 +14630,19 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 859530184}
-  - {fileID: 293856897}
-  - {fileID: 1481272120}
-  - {fileID: 1953388543}
-  - {fileID: 1207033387}
-  - {fileID: 1813272233}
-  - {fileID: 2102810870}
-  - {fileID: 627600117}
-  - {fileID: 663149237}
-  - {fileID: 445420487}
   - {fileID: 1735248602}
   - {fileID: 1904730084}
+  - {fileID: 1953388543}
+  - {fileID: 2102810870}
+  - {fileID: 1207033387}
+  - {fileID: 1813272233}
+  - {fileID: 627600117}
+  - {fileID: 663149237}
   - {fileID: 718339443}
   - {fileID: 1106220199}
   - {fileID: 1153821700}
   - {fileID: 1179888626}
   - {fileID: 964314572}
+  - {fileID: 445420487}
+  - {fileID: 1481272120}
+  - {fileID: 293856897}
