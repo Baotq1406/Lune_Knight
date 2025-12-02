@@ -6,7 +6,7 @@ public class GuideNPC : MonoBehaviour
     [SerializeField] private GameObject interactPrompt; // Nhắc nhở [Nhấn E]
 
     [TextArea(3, 10)] // Cho phép nhập lời thoại trực tiếp trong Inspector
-    [SerializeField] private string npcDialogue = "Hi bro.";
+    [SerializeField] private string npcDialogue = "Welcome to this journey! Let’s explore the world around us.";
 
     private bool playerInRange = false;
 
