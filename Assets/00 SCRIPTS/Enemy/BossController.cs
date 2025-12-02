@@ -89,6 +89,8 @@ public class BossController : Singleton<BossController>
     private bool _playerDetected = false; // co danh dau da phat hien player
     #endregion
 
+    [SerializeField] private GameObject _crystal;
+
 
     [SerializeField] private int _healthMaxBoss = 1000;
     [SerializeField] private int _currentHealthBoss;
@@ -549,6 +551,12 @@ public class BossController : Singleton<BossController>
             _currentHealthBoss = 0; // Dam bao health khong am
             UIManager.Instance.BossHealthSlider.gameObject.SetActive(false);
             StartCoroutine(DeathCoroutine());
+
+            // Spawn crystal khi boss chet
+            if (_crystal != null)
+            {
+                Instantiate(_crystal, transform.position, Quaternion.identity);
+            }
         }
         else
         {
